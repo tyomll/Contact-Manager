@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/tyommmm/Contact-Manager/static/css/main.f72572e6.css",
-    "main.js": "/tyommmm/Contact-Manager/static/js/main.b6365de0.js",
-    "index.html": "/tyommmm/Contact-Manager/index.html",
-    "main.f72572e6.css.map": "/tyommmm/Contact-Manager/static/css/main.f72572e6.css.map",
-    "main.b6365de0.js.map": "/tyommmm/Contact-Manager/static/js/main.b6365de0.js.map"
+    "main.css": "/Contact-Manager/static/css/main.f72572e6.css",
+    "main.js": "/Contact-Manager/static/js/main.b6365de0.js",
+    "index.html": "/Contact-Manager/index.html",
+    "main.f72572e6.css.map": "/Contact-Manager/static/css/main.f72572e6.css.map",
+    "main.b6365de0.js.map": "/Contact-Manager/static/js/main.b6365de0.js.map"
   },
   "entrypoints": [
     "static/css/main.f72572e6.css",
