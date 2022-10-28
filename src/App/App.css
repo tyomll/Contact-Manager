@@ -1,0 +1,13 @@
+body{
+    background-color: #F4F8F9;
+}
+.edit-modal-bg{
+    z-index: 4443;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    background-color: rgba(164, 167, 166, 0.67);
+}

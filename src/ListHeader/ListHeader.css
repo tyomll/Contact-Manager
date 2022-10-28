@@ -1,0 +1,28 @@
+.list-header{
+    display: flex;
+    height: 30px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    color: #678796;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.header-checkbox{
+    width: 5.7%;
+}
+.header-name{
+    width: 10%;
+}
+.header-email{
+    width: 30%;
+}
+.header-phone{
+    width: 28%;
+}
+.header-profession{
+    margin-left: -20px;
+}

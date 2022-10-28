@@ -1,0 +1,48 @@
+.list-item-container {
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    font-size: 18px;
+    margin: 20px 20px 20px 20px;
+    border-radius: 15px;
+}
+
+.list-item-container > div:nth-child(2) {
+    width: 5%;
+}
+.list-item-container > div:nth-child(3) {
+    width: 20%;
+}
+
+.list-item-container > div:nth-child(4) {
+    width: 30%;
+}
+
+.list-item-container > div:nth-child(5) {
+    width: 15%;
+}
+
+.list-item-container > div:nth-child(6) {
+    width: 15%;
+}
+
+.list-item-container > svg:nth-child(7) {
+    width: 5%;
+}
+.list-item-container > input {
+    width: 3%;
+}
+.avatar-img{
+    width: 50px;
+    border-radius: 50%;
+}
+.check, .edit, .delete{
+    margin-left: 20px;
+    cursor: pointer;
+}
+.swal-text{
+    text-align: center;
+}
