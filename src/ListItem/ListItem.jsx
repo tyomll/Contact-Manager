@@ -14,7 +14,6 @@ const ListItem = ({
   profession, 
   onDelete, 
   toggleMode,
-  setModal,
 }) => { 
   
   function openDeletePopup() { 
