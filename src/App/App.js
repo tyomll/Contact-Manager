@@ -1,19 +1,20 @@
 import "./App.css";
-import Header from "../Header/Header";
 import { list } from "../const";
 import ListItem from "../ListItem/ListItem";
 import { useState } from "react";
 import ListHeader from "../ListHeader/ListHeader";
 import ModalForm from "../ModalForm/ModalForm";
-import AddContact from "../AddContact/AddContact.jsx"
+import Header from "../Header/Header";
 
 const App = () => {
   const [contactList, setContactList] = useState(list)
   const [modalMode, setModalMode] = useState(false)
   const [editItem, setEditItem] = useState()
   const [mode, setMode] = useState(false)
+  const [checkedCount, setCheckedCount] = useState(0)
+
   return (
-    <div>
+    <div className="container">
       <div className="edit-modal-bg" style={{ display: modalMode ? "flex" : "none" }}>
         {(mode || editItem) && <ModalForm
           mode={mode}
@@ -47,13 +48,30 @@ const App = () => {
           }}
         />}
       </div>
-      <Header />
-      <AddContact setModalMode={setModalMode} setMode={setMode} />
-      <ListHeader />
+      <Header
+        setModalMode={setModalMode}
+        setMode={setMode}
+        checkedCount={checkedCount}
+        onDeleteSelected={() => {
+          setContactList(contactList.filter((contact) => {
+              return !contact.isChecked    
+          }))
+        }}
+         />
+      <ListHeader selectAll={(value) => {
+        setContactList(contactList.map((contact) => {
+          setCheckedCount(contactList.length)
+          return {
+            ...contact,
+            isChecked: value,
+          }
+        }))
+      }}/>
       <div className="list">
         {contactList.map((item) => {
           return (
             <ListItem
+              item={item}
               key={item.id}
               id={item.id}
               avatar={item.avatar}
@@ -62,9 +80,19 @@ const App = () => {
               email={item.email}
               phone={item.phone}
               profession={item.profession}
+              setCheckedCount={setCheckedCount}
+              checkedCount={checkedCount}
               toggleMode={() => {
                 setModalMode(true)
                 setEditItem(item)
+              }}
+              onChange={(newInfo) => {
+                setContactList(contactList.map((item) => {
+                  if (item.id === newInfo.id) {
+                    return newInfo
+                  }
+                  return item
+                }))
               }}
               onDelete={(id) => {
                 setContactList(contactList.filter((contact) => {
