@@ -11,7 +11,8 @@ const App = () => {
   const [modalMode, setModalMode] = useState(false)
   const [editItem, setEditItem] = useState()
   const [mode, setMode] = useState(false)
-  const [checkedCount, setCheckedCount] = useState(0)
+  const [selectAll, setSelectAll] = useState(false)
+  const [checkedItems, setCheckedItems] = useState([])
 
   return (
     <div className="container">
@@ -51,22 +52,21 @@ const App = () => {
       <Header
         setModalMode={setModalMode}
         setMode={setMode}
-        checkedCount={checkedCount}
         onDeleteSelected={() => {
           setContactList(contactList.filter((contact) => {
-              return !contact.isChecked    
+            return !contact.isChecked
           }))
         }}
-         />
-      <ListHeader selectAll={(value) => {
-        setContactList(contactList.map((contact) => {
-          setCheckedCount(contactList.length)
-          return {
-            ...contact,
-            isChecked: value,
-          }
-        }))
-      }}/>
+      />
+      <ListHeader onCheck={() => {
+        setSelectAll(!selectAll)
+        contactList.map(() => {
+          setCheckedItems([
+            ...contactList,
+          ]
+          )
+        })
+      }} />
       <div className="list">
         {contactList.map((item) => {
           return (
@@ -80,8 +80,25 @@ const App = () => {
               email={item.email}
               phone={item.phone}
               profession={item.profession}
-              setCheckedCount={setCheckedCount}
-              checkedCount={checkedCount}
+              selectAll={selectAll}
+              onCheck={(id, isChecked) => {
+                if (isChecked === false) {
+                  setCheckedItems(checkedItems.filter((contact) => {
+                    return contact.id !== id
+                  }))
+                }
+                if (isChecked === true) {
+                  contactList.map((contact) => {
+                    if (id === contact.id) {
+                      setCheckedItems([
+                        ...checkedItems,
+                        contact
+                      ]
+                      )
+                    }
+                  })
+                }
+              }}
               toggleMode={() => {
                 setModalMode(true)
                 setEditItem(item)

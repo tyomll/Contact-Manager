@@ -14,11 +14,10 @@ const ListItem = ({
   profession,
   onDelete,
   toggleMode,
-  item,
-  onChange,
-  setCheckedCount,
-  checkedCount,
+  selectAll,
+  onCheck,
 }) => {
+  const [isChecked, setIsChecked] = useState(false);
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -35,22 +34,21 @@ const ListItem = ({
       }
     });
   }
-
   return (
     <div className="list-item-container">
       <input
         type="checkbox"
-        checked={item.isChecked}
+        checked={isChecked}
         onChange={(e) => {
-          onChange({
-            ...item,
-            isChecked: e.target.checked,
-          });
-          if (e.target.checked === true) {
-            setCheckedCount(checkedCount + 1);
-          } else {
-            setCheckedCount(checkedCount - 1);
+          
+          if(isChecked === false){
+            onCheck(id , true);
+            setIsChecked(true)
           }
+          else{
+            onCheck(id , false);
+            setIsChecked(false)
+          }       
         }}
       />
       <div className="avatar">
@@ -79,5 +77,7 @@ const ListItem = ({
       </div>
     </div>
   );
+  
 };
+
 export default ListItem;
