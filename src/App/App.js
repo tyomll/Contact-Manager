@@ -8,7 +8,7 @@ function App (){
         
         <>
 
-        <Link to="">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/settings">Settings</Link>
         <Link to="/about">About Us</Link>
         <Routes>
