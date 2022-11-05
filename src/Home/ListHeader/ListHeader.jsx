@@ -7,7 +7,7 @@ const ListHeader = ({selectAll , onCheck , checkedItems , contactList}) => {
         <input
           type="checkbox"
           checked={checkedItems.length === contactList.length ? true : false}
-          onClick={() => {
+          onChange={() => {
             onCheck()
           }}
         />

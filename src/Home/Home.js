@@ -6,7 +6,7 @@ import ListHeader from "./ListHeader/ListHeader";
 import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
 
-const Home = () => {
+const Home = ({editMode}) => {
   const [contactList, setContactList] = useState(list);
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
@@ -29,11 +29,12 @@ const Home = () => {
 
   return (
     <div className="container">
+      {(editMode === "inline" ? mode:false|| editItem) && (
       <div
         className="edit-modal-bg"
         style={{ display: modalMode ? "flex" : "none" }}
       >
-        {(mode || editItem) && (
+        
           <ModalForm
             mode={mode}
             setMode={setMode}
@@ -67,8 +68,9 @@ const Home = () => {
               ]);
             }}
           />
-        )}
+       
       </div>
+      )}
       <Header
         setModalMode={setModalMode}
         setMode={setMode}
@@ -101,6 +103,9 @@ const Home = () => {
               profession={item.profession}
               selectAll={selectAll}
               checkedItems={checkedItems}
+              editMode={editMode}
+              setContactList={setContactList}
+              contactList={contactList}
               onCheck={(id, isChecked) => {
                 if (isChecked === false) {
                   setCheckedItems(

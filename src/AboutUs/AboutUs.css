@@ -1,0 +1,12 @@
+.about-us-container{
+    height: 80vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.about-us-heading{
+    font-size: 50px;
+    font-weight: 700;
+    color: rgb(81, 82, 83);
+}
