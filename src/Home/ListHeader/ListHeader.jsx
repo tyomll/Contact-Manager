@@ -1,13 +1,13 @@
 import "./ListHeader.css";
 import { useState } from "react";
-const ListHeader = ({setSelectAll , selectAll , onCheck}) => {
+const ListHeader = ({selectAll , onCheck , checkedItems , contactList}) => {
   return (
     <div className="list-header">
       <div className="header-checkbox">
         <input
           type="checkbox"
+          checked={checkedItems.length === contactList.length ? true : false}
           onClick={() => {
-
             onCheck()
           }}
         />

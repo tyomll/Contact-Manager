@@ -8,6 +8,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    -webkit-animation: showSweetAlert .3s;
+    animation: showSweetAlert .3s;
 }
 .edit-modal input{
     width: 250px;

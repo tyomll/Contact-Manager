@@ -16,6 +16,7 @@ const ListItem = ({
   toggleMode,
   selectAll,
   onCheck,
+  checkedItems,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   function openDeletePopup() {
@@ -38,16 +39,15 @@ const ListItem = ({
     <div className="list-item-container">
       <input
         type="checkbox"
-        checked={isChecked}
+        checked={checkedItems.includes(id)}
         onChange={(e) => {
-          
-          if(isChecked === false){
+          if(e.target.checked === true){
             onCheck(id , true);
-            setIsChecked(true)
+
           }
           else{
             onCheck(id , false);
-            setIsChecked(false)
+            
           }       
         }}
       />
