@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
+    flex-direction: column;
 }
 .edit-type{
     display: flex;
@@ -28,4 +28,18 @@
 .settings-page-container > span{
     color: rgb(81, 82, 83);
     font-size: 17px;
+}
+.add-type{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.inline-add{
+    display: flex;
+    flex-direction: column;
+}
+.modal-add{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
 }

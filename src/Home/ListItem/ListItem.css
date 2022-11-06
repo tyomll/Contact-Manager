@@ -46,6 +46,60 @@
 .swal-text{
     text-align: center;
 }
+.firstName-inline{ 
+    width: 10% !important;
+}
+.lastName-inline{
+    width: 10.5% !important;
+}
+.email-inline {
+    width: 29.5% !important;
+}
+
+.profession-inline {
+    width: 15% !important;
+}
+
+/* inputs */
+
+.firstName-inline input{
+    width: 120px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+    font-size: 14px;
+}
+.lastName-inline input{
+    width: 120px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+    font-size: 14px;
+}
+.email-inline input{
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+    font-size: 14px;
+}
+.phone-inline input{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+    font-size: 14px;
+}
+.profession-inline input{
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 30px;
+    font-size: 14px;
+}
 
 @media (max-width : 991px) {
     .list-item-container {

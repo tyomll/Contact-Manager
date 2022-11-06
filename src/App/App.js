@@ -6,6 +6,7 @@ import "./App.css";
 import { useState } from "react";
 function App() {
   const [editMode, setEditMode] = useState("inline");
+  const [addMode, setAddMode] = useState("modal");
   return (
     <>
       <header className="header">
@@ -22,8 +23,8 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path="/" element={<Home editMode={editMode} />} />
-        <Route path="/settings" element={<Settings setEditMode={setEditMode} editMode={editMode}/>} />
+        <Route path="/" element={<Home editMode={editMode} addMode={addMode}/>} />
+        <Route path="/settings" element={<Settings setEditMode={setEditMode} editMode={editMode} setAddMode={setAddMode} addMode={addMode}/>} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
     </>

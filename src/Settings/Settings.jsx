@@ -1,11 +1,12 @@
 import "./Settings.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-function Settings({ setEditMode, editMode }) {
-  
-
-  const handleChange = (e) => {
+function Settings({ setEditMode, editMode, setAddMode, addMode }) {
+  const handleEditChange = (e) => {
     setEditMode(e.target.value);
+  };
+  const handleAddChange = (e) => {
+    setAddMode(e.target.value);
   };
   return (
     <div className="settings-page-container">
@@ -17,7 +18,7 @@ function Settings({ setEditMode, editMode }) {
             type="radio"
             value="inline"
             checked={editMode === "inline"}
-            onChange={handleChange}
+            onChange={handleEditChange}
           />
         </div>
         <div className="modal-edit">
@@ -27,8 +28,29 @@ function Settings({ setEditMode, editMode }) {
             type="radio"
             value="modal"
             checked={editMode === 'modal'}
-            onChange={handleChange}
-            
+            onChange={handleEditChange} 
+          />
+        </div>
+      </div>
+      <div className="add-type">
+        <div className="inline-add">
+          <label>Inline Add</label>
+          <input
+            name="inline-add"
+            type="radio"
+            value="inline"
+            checked={addMode === "inline"}
+            onChange={handleAddChange}
+          />
+        </div>
+        <div className="modal-add">
+          <label>Modal Add</label>
+          <input
+            name="modal-add"
+            type="radio"
+            value="modal"
+            checked={addMode === 'modal'}
+            onChange={handleAddChange} 
           />
         </div>
       </div>

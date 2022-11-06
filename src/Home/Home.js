@@ -5,15 +5,16 @@ import { useState } from "react";
 import ListHeader from "./ListHeader/ListHeader";
 import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
+import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 
-const Home = ({editMode}) => {
+const Home = ({ editMode, addMode }) => {
   const [contactList, setContactList] = useState(list);
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
   const [mode, setMode] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [checkedItems, setCheckedItems] = useState([]);
-
+  const [addInline, setAddInline] = useState(false)
   function onCheck() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -26,15 +27,30 @@ const Home = ({editMode}) => {
       setCheckedItems([]);
     }
   }
-
+  function onAdd(id, name, surname, email, phone, profession) {
+    {
+      setContactList([
+        ...contactList,
+        {
+          key: id,
+          id: id,
+          firstName: name,
+          lastName: surname,
+          email: email,
+          phone: phone,
+          profession: profession,
+        },
+      ]);
+    }
+  }
   return (
     <div className="container">
-      {(editMode === "inline" ? mode:false|| editItem) && (
-      <div
-        className="edit-modal-bg"
-        style={{ display: modalMode ? "flex" : "none" }}
-      >
-        
+      {(editMode === "inline" ? mode : false || editItem) && (
+        <div
+          className="edit-modal-bg"
+          style={{ display: modalMode ? "flex" : "none" }}
+        >
+
           <ModalForm
             mode={mode}
             setMode={setMode}
@@ -53,28 +69,18 @@ const Home = ({editMode}) => {
                 })
               );
             }}
-            onAdd={(id, name, surname, email, phone, profession) => {
-              setContactList([
-                ...contactList,
-                {
-                  key: id,
-                  id: id,
-                  firstName: name,
-                  lastName: surname,
-                  email: email,
-                  phone: phone,
-                  profession: profession,
-                },
-              ]);
-            }}
+            onAdd={onAdd}
           />
-       
-      </div>
+
+        </div>
       )}
       <Header
         setModalMode={setModalMode}
         setMode={setMode}
         checkedItems={checkedItems}
+        addMode={addMode}
+        setAddInline={setAddInline}
+        editMode={editMode}
         onDeleteSelected={() => {
           setContactList(
             contactList.filter((contact) => !checkedItems.includes(contact.id)),
@@ -82,6 +88,7 @@ const Home = ({editMode}) => {
           )
         }}
       />
+      {addInline && <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline}/>}
       <ListHeader
         onCheck={onCheck}
         selectAll={selectAll}

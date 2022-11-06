@@ -106,46 +106,51 @@ const ListItem = ({
       <div className="avatar">
         <img className="avatar-img" src={avatar} />
       </div>
-      <div className="firstName">
+      <div className="firstName-inline">
         <input
           type="text"
           value={editedName}
+          placeholder="First Name"
           onChange={(e) => {
             setEditedName(e.target.value);
           }}
         />
       </div>
-      <div className="lastName">
+      <div className="lastName-inline">
         <input
           type="text"
           value={editedSurname}
+          placeholder="Last Name"
           onChange={(e) => {
             setEditedSurname(e.target.value);
           }}
         />
       </div>
-      <div className="email">
+      <div className="email-inline">
         <input
           type="text"
           value={editedEmail}
+          placeholder="Email"
           onChange={(e) => {
             setEditedEmail(e.target.value);
           }}
         />
       </div>
-      <div className="phone">
+      <div className="phone-inline">
         <input
           type="text"
           value={editedPhone}
+          placeholder="Phone"
           onChange={(e) => {
             setEditedPhone(e.target.value);
           }}
         />
       </div>
-      <div className="profession">
+      <div className="profession-inline">
         <input
           type="text"
           value={editedProfession}
+          placeholder="Profession"
           onChange={(e) => {
             setEditedProfession(e.target.value);
           }}
