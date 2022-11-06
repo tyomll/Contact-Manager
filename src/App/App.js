@@ -5,8 +5,9 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
 function App() {
-  const [editMode, setEditMode] = useState("inline");
+  const [editMode, setEditMode] = useState("modal");
   const [addMode, setAddMode] = useState("modal");
+  const [viewMode, setViewMode] = useState("list")
   return (
     <>
       <header className="header">
@@ -23,8 +24,14 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path="/" element={<Home editMode={editMode} addMode={addMode}/>} />
-        <Route path="/settings" element={<Settings setEditMode={setEditMode} editMode={editMode} setAddMode={setAddMode} addMode={addMode}/>} />
+        <Route path="/" element={<Home editMode={editMode} addMode={addMode} viewMode={viewMode}/>} />
+        <Route path="/settings" element={<Settings 
+        viewMode={viewMode} 
+        setViewMode={setViewMode}
+        setEditMode={setEditMode} 
+        editMode={editMode} 
+        setAddMode={setAddMode}
+        addMode={addMode}/>} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
     </>

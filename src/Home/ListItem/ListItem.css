@@ -9,11 +9,15 @@
     margin: 20px 20px 20px 20px;
     border-radius: 15px;
 }
-
+.list-item-container > input[type="checkbox"] {
+    margin-left: 10px;
+}
 .list-item-container > div:nth-child(2) {
+    margin-left: 10px;
     width: 5%;
 }
 .list-item-container > div:nth-child(3) {
+    
     width: 20%;
 }
 
@@ -32,7 +36,7 @@
 .list-item-container > svg:nth-child(7) {
     width: 5%;
 }
-.list-item-container > input {
+.list-item-container > input[type="text"] {
     width: 3%;
 }
 .avatar-img{

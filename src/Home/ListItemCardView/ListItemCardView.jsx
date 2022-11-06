@@ -1,10 +1,10 @@
-import "./ListItem.css";
+import "./ListItemCardView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import swal from "sweetalert";
 
-const ListItem = ({
+const ListItemCardView = ({
   item,
   id,
   avatar,
@@ -44,30 +44,19 @@ const ListItem = ({
     });
   }
   const listNormalMode = (
-    <div className="list-item-container">
-      <input
-        type="checkbox"
-        checked={checkedItems.includes(id)}
-        onChange={(e) => {
-          if (e.target.checked === true) {
-            onCheck(id, true);
-          } else {
-            onCheck(id, false);
-          }
-        }}
-      />
-      <div className="avatar">
-        <img className="avatar-img" src={avatar} />
+    <div className="card">
+      <div className="card-avatar">
+        <img className="card-avatar-img" src={avatar} />
       </div>
-      <div className="name">
+      <div className="card-name">
         {firstName}&nbsp;
         {lastName}
       </div>
-      <div className="email">{email}</div>
-      <div className="phone">{phone}</div>
-      <div className="profession">{profession}</div>
-      <div className="edit-btns">
-        <span className="edit">
+      <div className="card-email">{email}</div>
+      <div className="card-phone">{phone}</div>
+      <div className="card-profession">{profession}</div>
+      <div className="card-edit-btns">
+        <span className="card-edit">
           <FontAwesomeIcon
             icon={faPen}
             onClick={() => {
@@ -82,10 +71,22 @@ const ListItem = ({
           />
         </span>
 
-        <span className="delete" onClick={openDeletePopup}>
+        <span className="card-delete" onClick={openDeletePopup}>
           <FontAwesomeIcon icon={faTrash} />
         </span>
       </div>
+      <input
+        type="checkbox"
+        checked={checkedItems.includes(id)}
+        className="card-checkbox"
+        onChange={(e) => {
+          if (e.target.checked === true) {
+            onCheck(id, true);
+          } else {
+            onCheck(id, false);
+          }
+        }}
+      />
     </div>
   );
 
@@ -203,4 +204,4 @@ const ListItem = ({
   return mode ? listNormalMode : listEditMode;
 };
 
-export default ListItem;
+export default ListItemCardView;

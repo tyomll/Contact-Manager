@@ -28,4 +28,14 @@ export const list = [
     profession: "Doctor",
     avatar : "https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile11.png",
   },
+  {
+    id: uuid(),
+    firstName: "Gago",
+    lastName: "Papikyan",
+    email : "GagoPapikyan@gmail.com",
+    phone : "09400520383",
+    profession: "Doctor",
+    avatar : "https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile11.png",
+  },
+  
 ];

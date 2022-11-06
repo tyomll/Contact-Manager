@@ -1,12 +1,29 @@
 import "./Settings.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-function Settings({ setEditMode, editMode, setAddMode, addMode }) {
+import swal from "sweetalert";
+function Settings({ setEditMode, editMode, setAddMode, addMode , setViewMode, viewMode }) {
   const handleEditChange = (e) => {
-    setEditMode(e.target.value);
+    if(viewMode === "card" && e.target.value === "inline"){
+      swal("Oops Error", "You can't use inline edit mode in card view mode", "error");
+    }
+    else{
+      setEditMode(e.target.value)
+    }
+    
   };
   const handleAddChange = (e) => {
     setAddMode(e.target.value);
+  };
+  const handleViewModeChange = (e) => {
+    if(e.target.value === "card" && editMode === "inline"){
+      setEditMode("modal")
+      setViewMode(e.target.value);
+      swal("Oops Error", "You can't use inline edit mode in card view mode", "error");
+    }
+    else{
+      setViewMode(e.target.value);
+    }
   };
   return (
     <div className="settings-page-container">
@@ -51,6 +68,28 @@ function Settings({ setEditMode, editMode, setAddMode, addMode }) {
             value="modal"
             checked={addMode === 'modal'}
             onChange={handleAddChange} 
+          />
+        </div>
+      </div>
+      <div className="contacts-view">
+        <div className="card-view">
+          <label>Card View</label>
+          <input
+            name="card-view"
+            type="radio"
+            value="card"
+            checked={viewMode === "card"}
+            onChange={handleViewModeChange}
+          />
+        </div>
+        <div className="list-view">
+          <label>List view</label>
+          <input
+            name="list-view"
+            type="radio"
+            value="list"
+            checked={viewMode === 'list'}
+            onChange={handleViewModeChange} 
           />
         </div>
       </div>

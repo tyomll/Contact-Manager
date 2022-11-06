@@ -1,5 +1,5 @@
 import "./ListHeader.css";
-const ListHeader = ({onCheck , checkedItems , contactList}) => {
+const ListHeader = ({onCheckAll , checkedItems , contactList}) => {
   return (
     <div className="list-header">
       <div className="header-checkbox">
@@ -7,7 +7,7 @@ const ListHeader = ({onCheck , checkedItems , contactList}) => {
           type="checkbox"
           checked={checkedItems.length === contactList.length && contactList.length !== 0 ? true : false}
           onChange={() => {
-            onCheck()
+            onCheckAll()
           }}
         />
       </div>
