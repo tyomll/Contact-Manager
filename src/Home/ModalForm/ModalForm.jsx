@@ -41,14 +41,14 @@ function ModalForm({
       className="edit-modal-bg"
       style={{ display: modalMode ? "flex" : "none" }}
       onClick={(e) => {
-        if(e.target.className === "edit-modal-bg"){
+        if (e.target.className === "edit-modal-bg") {
           setModalMode(false);
-        setEditItem();
-        setEditedName(editItem.firstName);
-        setEditedSurname(editItem.lastName);
-        setEditedEmail(editItem.email);
-        setEditedPhone(editItem.phone);
-        setEditedProfession(editItem.profession);
+          setEditItem();
+          setEditedName(editItem.firstName);
+          setEditedSurname(editItem.lastName);
+          setEditedEmail(editItem.email);
+          setEditedPhone(editItem.phone);
+          setEditedProfession(editItem.profession);
         }
       }}
     >
@@ -149,16 +149,15 @@ function ModalForm({
       className="edit-modal-bg"
       style={{ display: modalMode ? "flex" : "none" }}
       onClick={(e) => {
-        if(e.target.className === "edit-modal-bg"){
+        if (e.target.className === "edit-modal-bg") {
           setModalMode(false);
-        setEditItem();
-        setEditedName(editItem.firstName);
-        setEditedSurname(editItem.lastName);
-        setEditedEmail(editItem.email);
-        setEditedPhone(editItem.phone);
-        setEditedProfession(editItem.profession);
+          setEditItem();
+          setEditedName(editItem.firstName);
+          setEditedSurname(editItem.lastName);
+          setEditedEmail(editItem.email);
+          setEditedPhone(editItem.phone);
+          setEditedProfession(editItem.profession);
         }
-        
       }}
     >
       <div className="edit-modal">

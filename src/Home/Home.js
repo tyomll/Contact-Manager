@@ -79,7 +79,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   }
   return (
     <div className="container">
-      {(editMode === "inline" ? mode : false || editItem) && (
+      {(modalMode|| editItem) && (
         <ModalForm
           mode={mode}
           setMode={setMode}
@@ -122,6 +122,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
         checkedItems={checkedItems}
         contactList={contactList}
         viewMode={viewMode}
+        
       />
       {viewMode === "list" && <div className="list">
         {contactList.map((item) => {
