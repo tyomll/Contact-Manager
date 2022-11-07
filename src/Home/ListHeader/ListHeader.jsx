@@ -1,10 +1,17 @@
 import "./ListHeader.css";
-const ListHeader = ({ onCheckAll, checkedItems, contactList, viewMode }) => {
-  
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
+const ListHeader = ({
+  onCheckAll,
+  checkedItems,
+  contactList,
+  viewMode,
+  filterAlphabetically,
+  setFilterAlphabetically,
+}) => {
   return (
     <>
       <div className="card-view-header">
-        
         <div
           className="card-header-checkbox"
           style={{ display: viewMode === "list" ? "none" : "flex" }}
@@ -53,6 +60,15 @@ const ListHeader = ({ onCheckAll, checkedItems, contactList, viewMode }) => {
         </div>
         <div className="header-profession">
           <p>profession</p>
+        </div>
+        <div className="filter">
+          <span
+            onClick={() => {
+              setFilterAlphabetically(!filterAlphabetically);
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
+          </span>
         </div>
       </div>
     </>

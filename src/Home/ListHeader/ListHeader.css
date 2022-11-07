@@ -41,3 +41,10 @@
 .header-profession{
     margin-left: -20px;
 }
+.filter{
+    margin-left: 170px;
+}
+.filter span{
+    font-size: 20px;
+    cursor: pointer;
+}

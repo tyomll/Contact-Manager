@@ -7,6 +7,7 @@ import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
 import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
+import NoContacts from "../NoContacts/NoContacts";
 
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState(list);
@@ -18,6 +19,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [addInline, setAddInline] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [searchBy, setSearchBy] = useState("firstName");
+  const [filterAlphabetically, setFilterAlphabetically] = useState(false)
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -132,13 +134,18 @@ const Home = ({ editMode, addMode, viewMode }) => {
         checkedItems={checkedItems}
         contactList={contactList}
         viewMode={viewMode}
-
+        filterAlphabetically={filterAlphabetically}
+        setFilterAlphabetically={setFilterAlphabetically}
       />
       {viewMode === "list" && <div className="list">
         {contactList.filter((contact) => {
           return searchValue.toLowerCase() === ""
             ? contact
             : contact[searchBy].toLowerCase().includes(searchValue);
+        }).sort((a, b) => {
+          if (filterAlphabetically === true) {
+            return a.firstName.localeCompare(b.firstName)
+          }
         }).map((item) => {
           return (
             <ListItem
@@ -200,6 +207,13 @@ const Home = ({ editMode, addMode, viewMode }) => {
           );
         })}
       </div>}
+      {contactList.length === 0 && (
+        <NoContacts
+          addMode={addMode}
+          setAddInline={setAddInline}
+          setModalMode={setModalMode}
+          setMode={setMode} />
+      )}
     </div>
   );
 };
