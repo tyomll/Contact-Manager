@@ -16,6 +16,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [checkedItems, setCheckedItems] = useState([]);
   const [addInline, setAddInline] = useState(false)
+  const [searchValue, setSearchValue] = useState("")
+  const [searchBy, setSearchBy] = useState("firstName");
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -77,9 +79,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
       })
     );
   }
+  function onSearch(value) {
+
+  }
   return (
     <div className="container">
-      {(modalMode|| editItem) && (
+      {(modalMode || editItem) && (
         <ModalForm
           mode={mode}
           setMode={setMode}
@@ -108,6 +113,11 @@ const Home = ({ editMode, addMode, viewMode }) => {
         addMode={addMode}
         setAddInline={setAddInline}
         editMode={editMode}
+        onSearch={onSearch}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        searchBy={searchBy}
+        setSearchBy={setSearchBy}
         onDeleteSelected={() => {
           setContactList(
             contactList.filter((contact) => !checkedItems.includes(contact.id)),
@@ -122,10 +132,14 @@ const Home = ({ editMode, addMode, viewMode }) => {
         checkedItems={checkedItems}
         contactList={contactList}
         viewMode={viewMode}
-        
+
       />
       {viewMode === "list" && <div className="list">
-        {contactList.map((item) => {
+        {contactList.filter((contact) => {
+          return searchValue.toLowerCase() === ""
+            ? contact
+            : contact[searchBy].toLowerCase().includes(searchValue);
+        }).map((item) => {
           return (
             <ListItem
               item={item}
@@ -154,7 +168,11 @@ const Home = ({ editMode, addMode, viewMode }) => {
         })}
       </div>}
       {viewMode === "card" && <div className="card-items">
-        {contactList.map((item) => {
+        {contactList.filter((contact) => {
+          return searchValue.toLowerCase() === ""
+            ? contact
+            : contact[searchBy].toLowerCase().includes(searchValue);
+        }).map((item) => {
           return (
             <ListItemCardView
               item={item}
