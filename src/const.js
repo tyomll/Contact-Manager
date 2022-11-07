@@ -35,7 +35,7 @@ export const list = [
     email : "GagoPapikyan@gmail.com",
     phone : "09400520383",
     profession: "Doctor",
-    avatar : "https://avatoon.me/wp-content/uploads/2021/09/Cartoon-Pic-Ideas-for-DP-Profile11.png",
+    avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfNoos7OObJTAELJbbB-bEy_O7F4tkcgnFH4YUa9Jd0scWSUV-SbrYq3j-L02LLk5xV3I&usqp=CAU",
   },
   
 ];

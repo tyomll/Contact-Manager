@@ -10,7 +10,22 @@
     font-weight: 500;
     margin-top: 20px;
 }
-
+.card-view-header{
+    display: flex;
+    height: 30px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    color: #678796;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#root > div > div.card-view-header > div > p{  
+    margin-left: 10px;
+}
 .header-checkbox{
     width: 5.7%;
 }

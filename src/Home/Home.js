@@ -8,7 +8,7 @@ import Header from "./Header/Header";
 import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 
-const Home = ({ editMode, addMode , viewMode}) => {
+const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState(list);
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
@@ -44,7 +44,7 @@ const Home = ({ editMode, addMode , viewMode}) => {
       ]);
     }
   }
-  function onCheck(id, isChecked){
+  function onCheck(id, isChecked) {
     if (isChecked === false) {
       setCheckedItems(
         checkedItems.filter((checkedItemId) => {
@@ -60,7 +60,7 @@ const Home = ({ editMode, addMode , viewMode}) => {
       });
     }
   }
-  function onChange(newInfo){
+  function onChange(newInfo) {
     setContactList(
       contactList.map((item) => {
         if (item.id === newInfo.id) {
@@ -70,7 +70,7 @@ const Home = ({ editMode, addMode , viewMode}) => {
       })
     );
   }
-  function onDelete(id){
+  function onDelete(id) {
     setContactList(
       contactList.filter((contact) => {
         return contact.id !== id;
@@ -80,26 +80,26 @@ const Home = ({ editMode, addMode , viewMode}) => {
   return (
     <div className="container">
       {(editMode === "inline" ? mode : false || editItem) && (
-          <ModalForm
-            mode={mode}
-            setMode={setMode}
-            setEditItem={setEditItem}
-            contactList={contactList}
-            setModalMode={setModalMode}
-            editItem={editItem}
-            modalMode={modalMode}
-            onChange={(newInfo) => {
-              setContactList(
-                contactList.map((item) => {
-                  if (item.id === newInfo.id) {
-                    return newInfo;
-                  }
-                  return item;
-                })
-              );
-            }}
-            onAdd={onAdd}
-          />
+        <ModalForm
+          mode={mode}
+          setMode={setMode}
+          setEditItem={setEditItem}
+          contactList={contactList}
+          setModalMode={setModalMode}
+          editItem={editItem}
+          modalMode={modalMode}
+          onChange={(newInfo) => {
+            setContactList(
+              contactList.map((item) => {
+                if (item.id === newInfo.id) {
+                  return newInfo;
+                }
+                return item;
+              })
+            );
+          }}
+          onAdd={onAdd}
+        />
       )}
       <Header
         setModalMode={setModalMode}
@@ -115,12 +115,13 @@ const Home = ({ editMode, addMode , viewMode}) => {
           )
         }}
       />
-      {addInline && <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline}/>}
+      {addInline && <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline} />}
       <ListHeader
         onCheckAll={onCheckAll}
         selectAll={selectAll}
         checkedItems={checkedItems}
         contactList={contactList}
+        viewMode={viewMode}
       />
       {viewMode === "list" && <div className="list">
         {contactList.map((item) => {
