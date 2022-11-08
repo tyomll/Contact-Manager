@@ -19,7 +19,7 @@ const ListItem = ({
   checkedItems,
   editMode,
   onChange,
-  dada,
+  reff,
 }) => {
   const [mode, setMode] = useState(true);
   const [editedName, setEditedName] = useState(item.firstName);
@@ -45,7 +45,7 @@ const ListItem = ({
     });
   }
   const listNormalMode = (
-    <div className="list-item-container" ref={dada.innerRef} {...dada.draggableProps} {...dada.dragHandleProps} >
+    <div className="list-item-container" ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps} >
       <input
         type="checkbox"
         checked={checkedItems.includes(id)}

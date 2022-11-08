@@ -9,7 +9,6 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { resetServerContext } from "react-beautiful-dnd";
 import uuid from "react-uuid";
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState(list);
@@ -22,6 +21,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
   const [filterAlphabetically, setFilterAlphabetically] = useState(false);
+  const [contacts , updateContacts] = useState(contactList)
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -82,8 +82,17 @@ const Home = ({ editMode, addMode, viewMode }) => {
         return contact.id !== id;
       })
     );
+
   }
   function onSearch(value) {}
+  function handleOnDragEnd(result){
+    if(!result.destination ) return;
+    const items = Array.from(contacts)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0 , reorderedItem)
+
+    updateContacts(items)
+  }
   return (
     <div className="container">
       {(modalMode || editItem) && (
@@ -125,6 +134,10 @@ const Home = ({ editMode, addMode, viewMode }) => {
             contactList.filter((contact) => !checkedItems.includes(contact.id)),
             setCheckedItems([])
           );
+          updateContacts(
+            contacts.filter((contact) => !checkedItems.includes(contact.id)),
+            setCheckedItems([])
+          );
         }}
       />
       {addInline && (
@@ -140,7 +153,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
         setFilterAlphabetically={setFilterAlphabetically}
       />
       {viewMode === "list" && (
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="list">
             {(provided) => (
               <div
@@ -149,7 +162,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                 {...provided.droppableProps}
                 
               >
-                {contactList
+                {contacts
                   .filter((contact) => {
                     return searchValue.toLowerCase() === ""
                       ? contact
@@ -170,7 +183,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                         {(provided) => (
                           <ListItem
 
-                            dada={provided}            
+                            reff={provided}            
                             item={item}
                             id={item.id}
                             avatar={item.avatar}
@@ -196,6 +209,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                       </Draggable>
                     );
                   })}
+                  {provided.placeholder}
               </div>
             )}
           </Droppable>
