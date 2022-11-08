@@ -10,7 +10,7 @@
 .card{
     display: flex;
     background-color: #27AAF9;
-    width: 25%;
+    width: 20%;
     align-items: center;
     height: 400px;
     flex-direction: column;

@@ -8,7 +8,9 @@ import Header from "./Header/Header";
 import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
-
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { resetServerContext } from "react-beautiful-dnd";
+import uuid from "react-uuid";
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState(list);
   const [modalMode, setModalMode] = useState(false);
@@ -16,10 +18,10 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [mode, setMode] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [checkedItems, setCheckedItems] = useState([]);
-  const [addInline, setAddInline] = useState(false)
-  const [searchValue, setSearchValue] = useState("")
+  const [addInline, setAddInline] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
-  const [filterAlphabetically, setFilterAlphabetically] = useState(false)
+  const [filterAlphabetically, setFilterAlphabetically] = useState(false);
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -81,9 +83,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
       })
     );
   }
-  function onSearch(value) {
-
-  }
+  function onSearch(value) {}
   return (
     <div className="container">
       {(modalMode || editItem) && (
@@ -124,10 +124,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setContactList(
             contactList.filter((contact) => !checkedItems.includes(contact.id)),
             setCheckedItems([])
-          )
+          );
         }}
       />
-      {addInline && <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline} />}
+      {addInline && (
+        <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline} />
+      )}
       <ListHeader
         onCheckAll={onCheckAll}
         selectAll={selectAll}
@@ -137,84 +139,115 @@ const Home = ({ editMode, addMode, viewMode }) => {
         filterAlphabetically={filterAlphabetically}
         setFilterAlphabetically={setFilterAlphabetically}
       />
-      {viewMode === "list" && <div className="list">
-        {contactList.filter((contact) => {
-          return searchValue.toLowerCase() === ""
-            ? contact
-            : contact[searchBy].toLowerCase().includes(searchValue);
-        }).sort((a, b) => {
-          if (filterAlphabetically === true) {
-            return a.firstName.localeCompare(b.firstName)
-          }
-        }).map((item) => {
-          return (
-            <ListItem
-              item={item}
-              key={item.id}
-              id={item.id}
-              avatar={item.avatar}
-              firstName={item.firstName}
-              lastName={item.lastName}
-              email={item.email}
-              phone={item.phone}
-              profession={item.profession}
-              selectAll={selectAll}
-              checkedItems={checkedItems}
-              editMode={editMode}
-              setContactList={setContactList}
-              contactList={contactList}
-              onCheck={onCheck}
-              toggleMode={() => {
-                setModalMode(true);
-                setEditItem(item);
-              }}
-              onChange={onChange}
-              onDelete={onDelete}
-            />
-          );
-        })}
-      </div>}
-      {viewMode === "card" && <div className="card-items">
-        {contactList.filter((contact) => {
-          return searchValue.toLowerCase() === ""
-            ? contact
-            : contact[searchBy].toLowerCase().includes(searchValue);
-        }).map((item) => {
-          return (
-            <ListItemCardView
-              item={item}
-              key={item.id}
-              id={item.id}
-              avatar={item.avatar}
-              firstName={item.firstName}
-              lastName={item.lastName}
-              email={item.email}
-              phone={item.phone}
-              profession={item.profession}
-              selectAll={selectAll}
-              checkedItems={checkedItems}
-              editMode={editMode}
-              setContactList={setContactList}
-              contactList={contactList}
-              onCheck={onCheck}
-              toggleMode={() => {
-                setModalMode(true);
-                setEditItem(item);
-              }}
-              onChange={onChange}
-              onDelete={onDelete}
-            />
-          );
-        })}
-      </div>}
+      {viewMode === "list" && (
+        <DragDropContext>
+          <Droppable droppableId="list">
+            {(provided) => (
+              <div
+                className="list"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                
+              >
+                {contactList
+                  .filter((contact) => {
+                    return searchValue.toLowerCase() === ""
+                      ? contact
+                      : contact[searchBy].toLowerCase().includes(searchValue);
+                  })
+                  .sort((a, b) => {
+                    if (filterAlphabetically === true) {
+                      return a.firstName.localeCompare(b.firstName);
+                    }
+                  })
+                  .map((item, index) => {
+                    return (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index} 
+                      >
+                        {(provided) => (
+                          <ListItem
+
+                            dada={provided}            
+                            item={item}
+                            id={item.id}
+                            avatar={item.avatar}
+                            firstName={item.firstName}
+                            lastName={item.lastName}
+                            email={item.email}
+                            phone={item.phone}
+                            profession={item.profession}
+                            selectAll={selectAll}
+                            checkedItems={checkedItems}
+                            editMode={editMode}
+                            setContactList={setContactList}
+                            contactList={contactList}
+                            onCheck={onCheck}
+                            toggleMode={() => {
+                              setModalMode(true);
+                              setEditItem(item);
+                            }}
+                            onChange={onChange}
+                            onDelete={onDelete}
+                          />
+                          )}
+                      </Draggable>
+                    );
+                  })}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
+      {viewMode === "card" && (
+        <div className="card-items">
+          {contactList
+            .filter((contact) => {
+              return searchValue.toLowerCase() === ""
+                ? contact
+                : contact[searchBy].toLowerCase().includes(searchValue);
+            })
+            .map((item) => {
+              return (
+                <ListItemCardView
+                  item={item}
+                  key={item.id}
+                  id={item.id}
+                  avatar={item.avatar}
+                  firstName={item.firstName}
+                  lastName={item.lastName}
+                  email={item.email}
+                  phone={item.phone}
+                  profession={item.profession}
+                  selectAll={selectAll}
+                  checkedItems={checkedItems}
+                  editMode={editMode}
+                  setContactList={setContactList}
+                  contactList={contactList}
+                  onCheck={onCheck}
+                  toggleMode={() => {
+                    setModalMode(true);
+                    setEditItem(item);
+                  }}
+                  onChange={onChange}
+                  onDelete={onDelete}
+                />
+              );
+            })}
+        </div>
+      )}
       {contactList.length === 0 && (
         <NoContacts
           addMode={addMode}
           setAddInline={setAddInline}
           setModalMode={setModalMode}
-          setMode={setMode} />
+          setMode={setMode}
+        />
       )}
     </div>
+    
   );
 };
 
