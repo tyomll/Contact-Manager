@@ -1,6 +1,6 @@
 import uuid from "react-uuid";
 
-export const list = [
+const list = [
   {
     id: uuid(),
     firstName: "Poxos",

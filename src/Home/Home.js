@@ -1,7 +1,7 @@
 import "./Home.css";
-import { list } from "../const";
+// import { list } from "../const";
 import ListItem from "./ListItem/ListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListHeader from "./ListHeader/ListHeader";
 import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
@@ -9,9 +9,9 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import axios from "axios";
 const Home = ({ editMode, addMode, viewMode }) => {
-  const [contactList, setContactList] = useState(list);
+  const [contactList, setContactList] = useState([]);
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
   const [mode, setMode] = useState(false);
@@ -21,7 +21,25 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
   const [filterAlphabetically, setFilterAlphabetically] = useState(false);
-  const [contacts, updateContacts] = useState(contactList)
+  const [contacts, updateContacts] = useState(contactList);
+  const [error, setError] = useState("");
+  async function fetchUsers() {
+    try {
+      setError("");
+      const response = await axios.get(
+        "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users"
+      );
+      const users = response.data;
+      setContactList(users);
+      updateContacts(users);
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -34,20 +52,31 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setCheckedItems([]);
     }
   }
-  function onAdd(id, name, surname, email, phone, profession) {
+  async function onAdd(id, name, surname, email, phone, profession) {
     {
-      setContactList([
+      const contact = {
+        firstName: name,
+        lastName: surname,
+        email,
+        phone,
+        profession,
+      };
+      updateContacts([
         ...contactList,
         {
-          key: id,
           id: id,
           firstName: name,
           lastName: surname,
-          email: email,
-          phone: phone,
-          profession: profession,
+          email,
+          phone,
+          profession,
         },
       ]);
+
+      const response = await axios.post(
+        "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
+        contact
+      );
     }
   }
   function onCheck(id, isChecked) {
@@ -76,22 +105,22 @@ const Home = ({ editMode, addMode, viewMode }) => {
       })
     );
   }
-  function onDelete(id) {
+  async function onDelete(id) {
     setContactList(
       contactList.filter((contact) => {
         return contact.id !== id;
       })
     );
-
+      const response = axios.delete("")
   }
-  function onSearch(value) { }
+  function onSearch(value) {}
   function handleOnDragEnd(result) {
     if (!result.destination) return;
-    const items = Array.from(contacts)
-    const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedItem)
+    const items = Array.from(contacts);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
 
-    updateContacts(items)
+    updateContacts(items);
   }
   function onDeleteSelected() {
     setContactList(
@@ -107,6 +136,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
     setModalMode(true);
     setEditItem(item);
   }
+
   return (
     <div className="container">
       {(modalMode || editItem) && (
@@ -156,7 +186,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
                 className="list"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-
               >
                 {contacts
                   .filter((contact) => {
@@ -170,15 +199,17 @@ const Home = ({ editMode, addMode, viewMode }) => {
                     }
                   })
                   .map((item, index) => {
+                    {
+                      console.log(item.id);
+                    }
                     return (
                       <Draggable
                         key={item.id}
-                        draggableId={item.id}
+                        draggableId={item.id.toString()}
                         index={index}
                       >
                         {(provided) => (
                           <ListItem
-
                             reff={provided}
                             item={item}
                             id={item.id}
@@ -195,7 +226,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                             contactList={contactList}
                             onCheck={onCheck}
                             toggleMode={() => {
-                              toggleMode(item)
+                              toggleMode(item);
                             }}
                             onChange={onChange}
                             onDelete={onDelete}
@@ -237,7 +268,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                   contactList={contactList}
                   onCheck={onCheck}
                   toggleMode={() => {
-                    toggleMode(item)
+                    toggleMode(item);
                   }}
                   onChange={onChange}
                   onDelete={onDelete}
@@ -249,13 +280,13 @@ const Home = ({ editMode, addMode, viewMode }) => {
       {contactList.length === 0 && (
         <NoContacts
           addMode={addMode}
+          error={error}
           setAddInline={setAddInline}
           setModalMode={setModalMode}
           setMode={setMode}
         />
       )}
     </div>
-
   );
 };
 

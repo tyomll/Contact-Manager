@@ -28,6 +28,7 @@ const ListItem = ({
   const [editedPhone, setEditedPhone] = useState(item.phone);
   const [editedProfession, setEditedProfession] = useState(item.profession);
   const [saveBtn, setSaveBtn] = useState(false);
+ 
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -45,12 +46,12 @@ const ListItem = ({
     });
   }
   const listNormalMode = (
-    <div className="list-item-container" ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps} >
+    <div className={checkedItems.includes(id) ? "list-item-container checked" : "list-item-container"} ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps} >
       <input
         type="checkbox"
         checked={checkedItems.includes(id)}
         onChange={(e) => {
-          if (e.target.checked === true) {
+          if (e.target.checked === true) {     
             onCheck(id, true);
           } else {
             onCheck(id, false);

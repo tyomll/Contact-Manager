@@ -1,9 +1,9 @@
 import "./NoContacts.css";
 
-function NoContacts({addMode , setAddInline , setModalMode, setMode}) {
+function NoContacts({addMode , setAddInline , setModalMode, setMode, error}) {
   return (
     <div className="no-contacts">
-      <h1 className="no-contacts-heading">No contacts</h1>
+      <h1 className="no-contacts-heading">{error}</h1>
       <span>
         Click here to{" "}
         <span style={{ color: "#756CC0" }} onClick={() => {
