@@ -9,7 +9,7 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import uuid from "react-uuid";
+
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState(list);
   const [modalMode, setModalMode] = useState(false);
@@ -21,7 +21,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
   const [filterAlphabetically, setFilterAlphabetically] = useState(false);
-  const [contacts , updateContacts] = useState(contactList)
+  const [contacts, updateContacts] = useState(contactList)
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {
@@ -67,7 +67,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
     }
   }
   function onChange(newInfo) {
-    setContactList(
+    updateContacts(
       contactList.map((item) => {
         if (item.id === newInfo.id) {
           return newInfo;
@@ -84,14 +84,28 @@ const Home = ({ editMode, addMode, viewMode }) => {
     );
 
   }
-  function onSearch(value) {}
-  function handleOnDragEnd(result){
-    if(!result.destination ) return;
+  function onSearch(value) { }
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
     const items = Array.from(contacts)
     const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0 , reorderedItem)
+    items.splice(result.destination.index, 0, reorderedItem)
 
     updateContacts(items)
+  }
+  function onDeleteSelected() {
+    setContactList(
+      contactList.filter((contact) => !checkedItems.includes(contact.id)),
+      setCheckedItems([])
+    );
+    updateContacts(
+      contacts.filter((contact) => !checkedItems.includes(contact.id)),
+      setCheckedItems([])
+    );
+  }
+  function toggleMode(item) {
+    setModalMode(true);
+    setEditItem(item);
   }
   return (
     <div className="container">
@@ -104,16 +118,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setModalMode={setModalMode}
           editItem={editItem}
           modalMode={modalMode}
-          onChange={(newInfo) => {
-            setContactList(
-              contactList.map((item) => {
-                if (item.id === newInfo.id) {
-                  return newInfo;
-                }
-                return item;
-              })
-            );
-          }}
+          onChange={onChange}
           onAdd={onAdd}
         />
       )}
@@ -129,16 +134,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
         setSearchValue={setSearchValue}
         searchBy={searchBy}
         setSearchBy={setSearchBy}
-        onDeleteSelected={() => {
-          setContactList(
-            contactList.filter((contact) => !checkedItems.includes(contact.id)),
-            setCheckedItems([])
-          );
-          updateContacts(
-            contacts.filter((contact) => !checkedItems.includes(contact.id)),
-            setCheckedItems([])
-          );
-        }}
+        onDeleteSelected={onDeleteSelected}
       />
       {addInline && (
         <InlineContactAdd onAdd={onAdd} setAddInline={setAddInline} />
@@ -160,7 +156,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                 className="list"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                
+
               >
                 {contacts
                   .filter((contact) => {
@@ -178,12 +174,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
                       <Draggable
                         key={item.id}
                         draggableId={item.id}
-                        index={index} 
+                        index={index}
                       >
                         {(provided) => (
                           <ListItem
 
-                            reff={provided}            
+                            reff={provided}
                             item={item}
                             id={item.id}
                             avatar={item.avatar}
@@ -199,17 +195,16 @@ const Home = ({ editMode, addMode, viewMode }) => {
                             contactList={contactList}
                             onCheck={onCheck}
                             toggleMode={() => {
-                              setModalMode(true);
-                              setEditItem(item);
+                              toggleMode(item)
                             }}
                             onChange={onChange}
                             onDelete={onDelete}
                           />
-                          )}
+                        )}
                       </Draggable>
                     );
                   })}
-                  {provided.placeholder}
+                {provided.placeholder}
               </div>
             )}
           </Droppable>
@@ -242,8 +237,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                   contactList={contactList}
                   onCheck={onCheck}
                   toggleMode={() => {
-                    setModalMode(true);
-                    setEditItem(item);
+                    toggleMode(item)
                   }}
                   onChange={onChange}
                   onDelete={onDelete}
@@ -261,7 +255,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
         />
       )}
     </div>
-    
+
   );
 };
 

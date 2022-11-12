@@ -9,7 +9,7 @@ function App() {
   const [addMode, setAddMode] = useState("modal");
   const [viewMode, setViewMode] = useState("list")
   return (
-    <>
+    <div className="container">
       <header className="header">
         <nav className="navigation">
           <div className="home">
@@ -34,7 +34,7 @@ function App() {
         addMode={addMode}/>} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>
-    </>
+    </div>
   );
 }
 export default App;
