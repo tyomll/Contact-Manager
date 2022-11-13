@@ -51,12 +51,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setCheckedItems([]);
     }
   }
-  async function onAdd(id, name, surname, email, phone, profession) {
+  async function onAdd(id, avatar, name, surname, email, phone, profession) {
     {
-      
-      
-      try{
+
+      try {
         const contact = {
+          avatar,
           firstName: name,
           lastName: surname,
           email,
@@ -71,6 +71,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
           ...contactList,
           {
             id: id,
+            avatar,
             firstName: name,
             lastName: surname,
             email,
@@ -82,6 +83,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
           ...contactList,
           {
             id: id,
+            avatar,
             firstName: name,
             lastName: surname,
             email,
@@ -90,10 +92,10 @@ const Home = ({ editMode, addMode, viewMode }) => {
           },
         ])
       }
-      catch(error){
+      catch (error) {
         setError(error)
       }
-      
+
     }
   }
   function onCheck(id, isChecked) {
@@ -123,7 +125,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
     );
   }
   async function onDelete(id) {
-    try{
+    try {
       const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
       setContactList(
         contactList.filter((contact) => {
@@ -136,11 +138,10 @@ const Home = ({ editMode, addMode, viewMode }) => {
         })
       )
     }
-    catch(error){
+    catch (error) {
       setError(error)
     }
   }
-  function onSearch(value) {}
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(contacts);
@@ -149,29 +150,22 @@ const Home = ({ editMode, addMode, viewMode }) => {
 
     updateContacts(items);
   }
-  function onDeleteSelected() {
-    
-    
-    try{
-      const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
-      selectedItems.map((id) => {
-        
-        const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
-        console.log(id, response)
-      })
-     
-      setContactList(
-        contactList.filter((contact) => !checkedItems.includes(contact.id)),
-        setCheckedItems([])
-      );
-      updateContacts(
-        contacts.filter((contact) => !checkedItems.includes(contact.id)),
-        setCheckedItems([])
-      );
-    }
-    catch(error){
-      setError(error)
-    }
+  async function onDeleteSelected() {
+    const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
+    selectedItems.map((id) => {
+      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+      console.log(id, response)
+    })
+    setContactList(
+      contactList.filter((contact) => !checkedItems.includes(contact.id)),
+      setCheckedItems([])
+    );
+    updateContacts(
+      contacts.filter((contact) => !checkedItems.includes(contact.id)),
+      setCheckedItems([])
+    );
+
+
   }
   function toggleMode(item) {
     setModalMode(true);
@@ -202,7 +196,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
         addMode={addMode}
         setAddInline={setAddInline}
         editMode={editMode}
-        onSearch={onSearch}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         searchBy={searchBy}
@@ -242,7 +235,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                     }
                   })
                   .map((item, index) => {
-                    
+
                     return (
                       <Draggable
                         key={item.id}

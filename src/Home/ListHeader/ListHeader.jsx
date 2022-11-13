@@ -63,6 +63,7 @@ const ListHeader = ({
         </div>
         <div className="filter">
           <span
+            style={{color : filterAlphabetically ? "rgb(39 170 249)" : "#678796"}}
             onClick={() => {
               setFilterAlphabetically(!filterAlphabetically);
             }}

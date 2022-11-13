@@ -22,10 +22,11 @@
     justify-content: center;
     -webkit-animation: showSweetAlert .3s;
     animation: showSweetAlert .3s;
+
 }
 .edit-modal input{
     width: 250px;
-    height: 30px;
+    height: 20px;
     border: none;
     border-bottom: 1px solid rgb(43, 43, 43);
     background-color: inherit;

@@ -14,7 +14,6 @@ function Header({
   checkedItems,
   addMode,
   setAddInline,
-  onSearch,
   searchValue,
   setSearchValue,
   searchBy,
@@ -55,7 +54,6 @@ function Header({
             value={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value);
-              onSearch(searchValue, searchBy);
             }}
           />
         </div>
