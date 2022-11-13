@@ -38,7 +38,7 @@ const ListItem = ({
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        onDelete(id);
+        onDelete(item.id);
         swal("Contact has been deleted!", {
           icon: "success",
         });

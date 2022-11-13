@@ -1,5 +1,4 @@
 import "./Home.css";
-// import { list } from "../const";
 import ListItem from "./ListItem/ListItem";
 import { useEffect, useState } from "react";
 import ListHeader from "./ListHeader/ListHeader";
@@ -23,12 +22,15 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [filterAlphabetically, setFilterAlphabetically] = useState(false);
   const [contacts, updateContacts] = useState(contactList);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
   async function fetchUsers() {
     try {
+      setLoading(true)
       setError("");
       const response = await axios.get(
         "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users"
       );
+      setLoading(false)
       const users = response.data;
       setContactList(users);
       updateContacts(users);
@@ -36,9 +38,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setError(e.message);
     }
   }
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   function onCheckAll() {
     setSelectAll(!selectAll);
@@ -54,29 +53,47 @@ const Home = ({ editMode, addMode, viewMode }) => {
   }
   async function onAdd(id, name, surname, email, phone, profession) {
     {
-      const contact = {
-        firstName: name,
-        lastName: surname,
-        email,
-        phone,
-        profession,
-      };
-      updateContacts([
-        ...contactList,
-        {
-          id: id,
+      
+      
+      try{
+        const contact = {
           firstName: name,
           lastName: surname,
           email,
           phone,
           profession,
-        },
-      ]);
-
-      const response = await axios.post(
-        "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
-        contact
-      );
+        };
+        const response = await axios.post(
+          "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
+          contact
+        );
+        setContactList([
+          ...contactList,
+          {
+            id: id,
+            firstName: name,
+            lastName: surname,
+            email,
+            phone,
+            profession,
+          },
+        ]);
+        updateContacts([
+          ...contactList,
+          {
+            id: id,
+            firstName: name,
+            lastName: surname,
+            email,
+            phone,
+            profession,
+          },
+        ])
+      }
+      catch(error){
+        setError(error)
+      }
+      
     }
   }
   function onCheck(id, isChecked) {
@@ -106,12 +123,22 @@ const Home = ({ editMode, addMode, viewMode }) => {
     );
   }
   async function onDelete(id) {
-    setContactList(
-      contactList.filter((contact) => {
-        return contact.id !== id;
-      })
-    );
-      const response = axios.delete("")
+    try{
+      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+      setContactList(
+        contactList.filter((contact) => {
+          return contact.id !== id;
+        })
+      )
+      updateContacts(
+        contactList.filter((contact) => {
+          return contact.id !== id;
+        })
+      )
+    }
+    catch(error){
+      setError(error)
+    }
   }
   function onSearch(value) {}
   function handleOnDragEnd(result) {
@@ -123,20 +150,36 @@ const Home = ({ editMode, addMode, viewMode }) => {
     updateContacts(items);
   }
   function onDeleteSelected() {
-    setContactList(
-      contactList.filter((contact) => !checkedItems.includes(contact.id)),
-      setCheckedItems([])
-    );
-    updateContacts(
-      contacts.filter((contact) => !checkedItems.includes(contact.id)),
-      setCheckedItems([])
-    );
+    
+    
+    try{
+      const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
+      selectedItems.map((id) => {
+        
+        const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+        console.log(id, response)
+      })
+     
+      setContactList(
+        contactList.filter((contact) => !checkedItems.includes(contact.id)),
+        setCheckedItems([])
+      );
+      updateContacts(
+        contacts.filter((contact) => !checkedItems.includes(contact.id)),
+        setCheckedItems([])
+      );
+    }
+    catch(error){
+      setError(error)
+    }
   }
   function toggleMode(item) {
     setModalMode(true);
     setEditItem(item);
   }
-
+  useEffect(() => {
+    fetchUsers();
+  }, []);
   return (
     <div className="container">
       {(modalMode || editItem) && (
@@ -199,9 +242,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                     }
                   })
                   .map((item, index) => {
-                    {
-                      console.log(item.id);
-                    }
+                    
                     return (
                       <Draggable
                         key={item.id}
@@ -277,7 +318,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
             })}
         </div>
       )}
-      {contactList.length === 0 && (
+      {!loading && contactList.length === 0 && (
         <NoContacts
           addMode={addMode}
           error={error}
@@ -285,6 +326,10 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setModalMode={setModalMode}
           setMode={setMode}
         />
+      )}
+      {loading && (
+        <div className="lds-dual-ring">
+        </div>
       )}
     </div>
   );
