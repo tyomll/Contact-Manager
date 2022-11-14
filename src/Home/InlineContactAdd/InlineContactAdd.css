@@ -7,7 +7,7 @@
     animation: showSweetAlert .3s;
 }
 .contact-add-inline input {
-    margin-left: 30px;
+    margin-left: 20px;
     height: 30px;
     width: 205px;
     font-size: 18px;
@@ -19,14 +19,15 @@
    
 }
 .contact-add-inline button{ 
-    height: 30px;
-    width: 100px;
     margin-left: 20px;
+    width: 30px;
+    height: 30px;
     border: none;
     outline: none;
     background-color: rgb(0, 132, 255);
-    border-radius: 5px;
+    border-radius: 4px;
     color: white;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 19px;
+    padding: 5px;
 }

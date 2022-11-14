@@ -3,38 +3,60 @@ import Settings from "../Settings/Settings";
 import AboutUs from "../AboutUs/AboutUs";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function App() {
-  const [editMode, setEditMode] = useState("modal");
-  const [addMode, setAddMode] = useState("modal");
-  const [viewMode, setViewMode] = useState("list")
+  const editModeFromLocalStorage = JSON.parse(localStorage.getItem('editMode') || 'modal')
+  const addModeFromLocalStorage = JSON.parse(localStorage.getItem('addMode') || 'modal')
+  const viewModeFromLocalStorage = JSON.parse(localStorage.getItem('viewMode') || 'list')
+
+  const [editMode, setEditMode] = useState(editModeFromLocalStorage);
+  const [addMode, setAddMode] = useState(addModeFromLocalStorage);
+  const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem("editMode", JSON.stringify(editMode))
+  }, [editMode])
+
+  useEffect(() => {
+    localStorage.setItem("addMode", JSON.stringify(addMode))
+  }, [addMode])
+
+  useEffect(() => {
+    localStorage.setItem("viewMode", JSON.stringify(viewMode))
+  }, [viewMode])
+
   return (
     <div className="container">
-      <header className="header">
-        <nav className="navigation">
-          <div className="home">
-            <Link to="/">Home</Link>
-          </div>
-          <div className="settings">
-            <Link to="/settings">Settings</Link>
-          </div>
-          <div className="about-us">
-            <Link to="/about">About Us</Link>
-          </div>
-        </nav>
-      </header>
-      <Routes>
-        <Route path="/" element={<Home editMode={editMode} addMode={addMode} viewMode={viewMode}/>} />
-        <Route path="/settings" element={<Settings 
-        viewMode={viewMode} 
-        setViewMode={setViewMode}
-        setEditMode={setEditMode} 
-        editMode={editMode} 
-        setAddMode={setAddMode}
-        addMode={addMode}/>} />
-        <Route path="/about" element={<AboutUs />} />
-      </Routes>
+      <div className="app-wrapper">
+        <header className="header">
+          <nav className="navigation">
+            <div className="home">
+              <Link to="/">Home</Link>
+            </div>
+            <div className="nav-right">
+              <div className="settings">
+                <Link to="/settings">Settings</Link>
+              </div>
+              <div className="about-us">
+                <Link to="/about">About Us</Link>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <Routes>
+          <Route path="/" element={<Home editMode={editMode} addMode={addMode} viewMode={viewMode} />} />
+          <Route path="/settings" element={<Settings
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            setEditMode={setEditMode}
+            editMode={editMode}
+            setAddMode={setAddMode}
+            addMode={addMode} />} />
+          <Route path="/about" element={<AboutUs />} />
+        </Routes>
+      </div>
     </div>
+
   );
 }
 export default App;

@@ -21,7 +21,6 @@
     text-transform: uppercase;
     font-weight: 500;
     margin-top: 20px;
-    margin-left: 20px;
 }
 #root > div > div.card-view-header > div > p{  
     margin-left: 10px;
@@ -44,7 +43,7 @@
 .filter{
     margin-left: 170px;
 }
-.filter span{
+.filter-alphabetically{
     font-size: 20px;
     cursor: pointer;
 }

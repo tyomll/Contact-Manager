@@ -2,6 +2,9 @@ import "./InlineContactAdd.css";
 import { useState } from "react";
 import uuid from "react-uuid";
 import swal from "sweetalert";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX, faAdd} from "@fortawesome/free-solid-svg-icons";
+
 function InlineContactAdd({ onAdd , setAddInline}) {
   const [newName, setNewName] = useState("");
   const [newSurname, setNewSurname] = useState("");
@@ -57,7 +60,7 @@ function InlineContactAdd({ onAdd , setAddInline}) {
         setNewEmail("")
         setNewPhone("")
         setNewProfession("")
-      }}>Close</button>
+      }}><FontAwesomeIcon icon={faX}></FontAwesomeIcon></button>
       <button
         onClick={() => {
           if (
@@ -85,7 +88,7 @@ function InlineContactAdd({ onAdd , setAddInline}) {
           }
         }}
       >
-        Add
+        <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
       </button>
     </div>
   );

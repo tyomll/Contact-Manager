@@ -1,14 +1,6 @@
 body {
   background-color: #f4f8f9;
 }
-.container {
-  width: 100%;
-
- 
-  overflow-x: hidden;
-
-}
-
 input[type="checkbox"] {
   width: 20px;
     height: 20px;

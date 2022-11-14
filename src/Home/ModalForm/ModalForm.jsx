@@ -14,9 +14,6 @@ function ModalForm({
   modalMode,
 }) {
   // Edit mode states
-  const [editedAvatar, setEditedAvatar] = useState(
-    mode ? undefined : editItem.avatar
-  );
   const [editedName, setEditedName] = useState(
     mode ? undefined : editItem.firstName
   );
@@ -34,7 +31,6 @@ function ModalForm({
   );
 
   // Adding contact mode states
-  const [newAvatar, setNewAvatar] = useState();
   const [newName, setNewName] = useState();
   const [newSurname, setNewSurname] = useState();
   const [newEmail, setNewEmail] = useState();
@@ -48,7 +44,6 @@ function ModalForm({
         if (e.target.className === "edit-modal-bg") {
           setModalMode(false);
           setEditItem();
-          setEditedAvatar(editItem.avatar)
           setEditedName(editItem.firstName);
           setEditedSurname(editItem.lastName);
           setEditedEmail(editItem.email);
@@ -59,14 +54,6 @@ function ModalForm({
     >
       <div className="edit-modal">
         <h2>Edit Contact</h2>
-        <label>Avatar</label>
-        <input
-          type="text"
-          value={editedAvatar}
-          onChange={(e) => {
-            setEditedAvatar(e.target.value);
-          }}
-        ></input>
         <label>Name</label>
         <input
           type="text"
@@ -112,7 +99,6 @@ function ModalForm({
             onClick={() => {
               setModalMode(false);
               setEditItem();
-              setEditedAvatar(editItem.avatar)
               setEditedName(editItem.firstName);
               setEditedSurname(editItem.lastName);
               setEditedEmail(editItem.email);
@@ -125,7 +111,6 @@ function ModalForm({
           <button
             onClick={() => {
               if (
-                editedAvatar !== "" &&
                 editedName !== "" &&
                 editedSurname !== "" &&
                 editedEmail !== "" &&
@@ -135,7 +120,6 @@ function ModalForm({
                 onChange({
                   ...editItem,
                   id: editItem.id,
-                  avatar: editedAvatar,
                   firstName: editedName,
                   lastName: editedSurname,
                   email: editedEmail,
@@ -144,7 +128,6 @@ function ModalForm({
                 });
 
                 setEditItem();
-                setEditedAvatar(editItem.avatar)
                 setEditedName(editItem.firstName);
                 setEditedSurname(editItem.lastName);
                 setEditedEmail(editItem.email);
@@ -180,14 +163,6 @@ function ModalForm({
     >
       <div className="edit-modal">
         <h2>Add contact</h2>
-        <label>Avatar</label>
-        <input
-          type="text"
-          value={newAvatar}
-          onChange={(e) => {
-            setNewAvatar(e.target.value);
-          }}
-        ></input>
         <label>Name</label>
         <input
           type="text"
@@ -240,7 +215,6 @@ function ModalForm({
           <button
             onClick={() => {
               if (
-                newAvatar !== "" &&
                 newName !== "" &&
                 newSurname !== "" &&
                 newEmail !== "" &&
@@ -249,14 +223,12 @@ function ModalForm({
               ) {
                 onAdd(
                   uuid(),
-                  newAvatar,
                   newName,
                   newSurname,
                   newEmail,
                   newPhone,
                   newProfession
                 );
-                setNewAvatar("")
                 setNewName("");
                 setNewSurname("");
                 setNewEmail("");

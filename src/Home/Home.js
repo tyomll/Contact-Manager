@@ -51,52 +51,48 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setCheckedItems([]);
     }
   }
-  async function onAdd(id, avatar, name, surname, email, phone, profession) {
-    {
+  async function onAdd(id, name, surname, email, phone, profession) {
+    console.log(profession)
 
-      try {
-        const contact = {
-          avatar,
+    try {
+      const contact = {
+        firstName: name,
+        lastName: surname,
+        email,
+        phone,
+        profession
+      };
+      const response = await axios.post(
+        "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
+        contact
+      );
+      setContactList([
+        ...contactList,
+        {
+          id: id,
           firstName: name,
           lastName: surname,
           email,
           phone,
-          profession,
-        };
-        const response = await axios.post(
-          "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
-          contact
-        );
-        setContactList([
-          ...contactList,
-          {
-            id: id,
-            avatar,
-            firstName: name,
-            lastName: surname,
-            email,
-            phone,
-            profession,
-          },
-        ]);
-        updateContacts([
-          ...contactList,
-          {
-            id: id,
-            avatar,
-            firstName: name,
-            lastName: surname,
-            email,
-            phone,
-            profession,
-          },
-        ])
-      }
-      catch (error) {
-        setError(error)
-      }
-
+          profession
+        },
+      ]);
+      updateContacts([
+        ...contactList,
+        {
+          id: id,
+          firstName: name,
+          lastName: surname,
+          email,
+          phone,
+          profession
+        },
+      ])
     }
+    catch (error) {
+      setError(error)
+    }
+
   }
   function onCheck(id, isChecked) {
     if (isChecked === false) {
@@ -114,7 +110,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
       });
     }
   }
-  function onChange(newInfo) {
+  async function onChange(newInfo) {
+    const response = await axios.put(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${newInfo.id}`, newInfo)
     updateContacts(
       contactList.map((item) => {
         if (item.id === newInfo.id) {
@@ -175,7 +172,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
     fetchUsers();
   }, []);
   return (
-    <div className="container">
+    <div className="container-home">
       {(modalMode || editItem) && (
         <ModalForm
           mode={mode}

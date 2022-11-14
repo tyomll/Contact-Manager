@@ -78,6 +78,7 @@ function Header({
           className="delete-contact-btn"
           style={{
             backgroundColor: checkedItems.length > 0 ? "#27AAF9" : "#d9d8d8",
+            cursor : checkedItems.length > 0 ?  "pointer" : "not-allowed",
           }}
           onClick={() => {
             onDeleteSelected();

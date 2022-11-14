@@ -12,6 +12,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.app-wrapper{
+  width: 85%;
+}
 .header {
   display: flex;
   flex-direction: row;
@@ -21,14 +29,14 @@
 .navigation {
   display: flex;
   width: 100%;
-  margin: 20px 20px 20px 20px;
   font-size: 20px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
-.home {
-  flex: 1;
-}
-.settings {
-  margin-right: 50px;
+.nav-right{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
 }
 a {
   text-decoration: none;
