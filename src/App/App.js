@@ -5,10 +5,9 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect } from "react";
 function App() {
-  const editModeFromLocalStorage = JSON.parse(localStorage.getItem('editMode') || 'modal')
-  const addModeFromLocalStorage = JSON.parse(localStorage.getItem('addMode') || 'modal')
-  const viewModeFromLocalStorage = JSON.parse(localStorage.getItem('viewMode') || 'list')
-
+  const editModeFromLocalStorage = localStorage.getItem('editMode') || 'modal'
+  const addModeFromLocalStorage = localStorage.getItem('addMode') || 'modal'
+  const viewModeFromLocalStorage = localStorage.getItem('viewMode') || 'list'
   const [editMode, setEditMode] = useState(editModeFromLocalStorage);
   const [addMode, setAddMode] = useState(addModeFromLocalStorage);
   const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
