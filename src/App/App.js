@@ -13,15 +13,15 @@ function App() {
   const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
 
   useEffect(() => {
-    localStorage.setItem("editMode", JSON.stringify(editMode))
+    localStorage.setItem("editMode", editMode)
   }, [editMode])
 
   useEffect(() => {
-    localStorage.setItem("addMode", JSON.stringify(addMode))
+    localStorage.setItem("addMode", addMode)
   }, [addMode])
 
   useEffect(() => {
-    localStorage.setItem("viewMode", JSON.stringify(viewMode))
+    localStorage.setItem("viewMode", viewMode)
   }, [viewMode])
 
   return (
