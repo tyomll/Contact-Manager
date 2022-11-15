@@ -1,9 +1,10 @@
 .settings-page-container{
-    height: 80vh; 
+    
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    height: 90vh;
 }
 .edit-type{
     display: flex;

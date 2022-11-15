@@ -53,7 +53,7 @@ function ModalForm({
       }}
     >
       <div className="edit-modal">
-        <h2>Edit Contact</h2>
+        <h1>Edit Contact</h1>
         <label>Name</label>
         <input
           type="text"
@@ -162,7 +162,7 @@ function ModalForm({
       }}
     >
       <div className="edit-modal">
-        <h2>Add contact</h2>
+        <h1>Add contact</h1>
         <label>Name</label>
         <input
           type="text"

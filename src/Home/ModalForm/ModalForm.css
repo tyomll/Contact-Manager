@@ -22,7 +22,10 @@
     justify-content: center;
     -webkit-animation: showSweetAlert .3s;
     animation: showSweetAlert .3s;
-
+}
+.edit-modal h1{
+    font-size: 22px;
+    font-weight: 600;
 }
 .edit-modal input{
     width: 250px;
