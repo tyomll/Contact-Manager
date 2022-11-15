@@ -15,7 +15,3 @@ a {
   text-decoration: none;
   color: #756cc0;
 }
-.h-screen {
-  min-height: 100vh;
-  height: auto !important;
-}

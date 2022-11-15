@@ -28,7 +28,6 @@ const ListItem = ({
   const [editedPhone, setEditedPhone] = useState(item.phone);
   const [editedProfession, setEditedProfession] = useState(item.profession);
   const [saveBtn, setSaveBtn] = useState(false);
- 
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -92,7 +91,7 @@ const ListItem = ({
   );
 
   const listEditMode = (
-    <div className="list-item-container">
+    <div className="list-item-container" ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps}>
       <input
         type="checkbox"
         checked={checkedItems.includes(id)}
