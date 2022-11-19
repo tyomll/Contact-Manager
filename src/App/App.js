@@ -1,7 +1,7 @@
 import Home from "../Home/Home";
 import Settings from "../Settings/Settings";
 import AboutUs from "../AboutUs/AboutUs";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route , Link} from "react-router-dom";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import swal from "sweetalert";
+import ListItemInputChange from "./ListItemInputChange";
 
 const ListItem = ({
   item,
@@ -25,9 +26,12 @@ const ListItem = ({
   const [editedName, setEditedName] = useState(item.firstName);
   const [editedSurname, setEditedSurname] = useState(item.lastName);
   const [editedEmail, setEditedEmail] = useState(item.email);
-  const [editedPhone, setEditedPhone] = useState(item.phone);
+  const [phoneNumbers, setPhoneNumbers] = useState([]);
+  const [editedPhone, setEditedPhone] = useState();
   const [editedProfession, setEditedProfession] = useState(item.profession);
   const [saveBtn, setSaveBtn] = useState(false);
+
+  console.log(phoneNumbers);
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -44,13 +48,33 @@ const ListItem = ({
       }
     });
   }
+  function changePhoneNumber(index, phone) {
+    
+    setPhoneNumbers(
+      [
+        {
+          index,
+          phone
+        }
+      ]
+    );
+  }
   const listNormalMode = (
-    <div className={checkedItems.includes(id) ? "list-item-container checked" : "list-item-container"} ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps} >
+    <div
+      className={
+        checkedItems.includes(id)
+          ? "list-item-container checked"
+          : "list-item-container"
+      }
+      ref={reff.innerRef}
+      {...reff.draggableProps}
+      {...reff.dragHandleProps}
+    >
       <input
         type="checkbox"
         checked={checkedItems.includes(id)}
         onChange={(e) => {
-          if (e.target.checked === true) {     
+          if (e.target.checked === true) {
             onCheck(id, true);
           } else {
             onCheck(id, false);
@@ -65,7 +89,14 @@ const ListItem = ({
         {lastName}
       </div>
       <div className="email">{email}</div>
-      <div className="phone">{phone}</div>
+
+      <div className="phone">
+        <ul>
+          {item.phone.map((number, i) => {
+            return <li key={i}>{number}</li>;
+          })}
+        </ul>
+      </div>
       <div className="profession">{profession}</div>
       <div className="edit-btns">
         <span className="edit">
@@ -91,7 +122,12 @@ const ListItem = ({
   );
 
   const listEditMode = (
-    <div className="list-item-container" ref={reff.innerRef} {...reff.draggableProps} {...reff.dragHandleProps}>
+    <div
+      className="list-item-container"
+      ref={reff.innerRef}
+      {...reff.draggableProps}
+      {...reff.dragHandleProps}
+    >
       <input
         type="checkbox"
         checked={checkedItems.includes(id)}
@@ -137,14 +173,16 @@ const ListItem = ({
         />
       </div>
       <div className="phone-inline">
-        <input
-          type="text"
-          value={editedPhone}
-          placeholder="Phone"
-          onChange={(e) => {
-            setEditedPhone(e.target.value);
-          }}
-        />
+        {phone.map((num, i) => {
+          return (
+            <ListItemInputChange
+              num={num}
+              key={i}
+              changePhoneNumber={changePhoneNumber}
+              index={i}
+            />
+          );
+        })}
       </div>
       <div className="profession-inline">
         <input
