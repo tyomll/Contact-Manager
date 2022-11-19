@@ -1,6 +1,4 @@
 import "./Settings.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import swal from "sweetalert";
 function Settings({
   setEditMode,
