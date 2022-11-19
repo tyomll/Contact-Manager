@@ -23,6 +23,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [contacts, updateContacts] = useState(contactList);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false)
+
   async function fetchUsers() {
     try {
       setLoading(true)
