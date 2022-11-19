@@ -26,12 +26,12 @@ const ListItem = ({
   const [editedName, setEditedName] = useState(item.firstName);
   const [editedSurname, setEditedSurname] = useState(item.lastName);
   const [editedEmail, setEditedEmail] = useState(item.email);
-  const [phoneNumbers, setPhoneNumbers] = useState([]);
+  const [phoneNumbers, setPhoneNumbers] = useState(item.phone.map((number, i) => {
+    return number
+  }));
   const [editedPhone, setEditedPhone] = useState();
   const [editedProfession, setEditedProfession] = useState(item.profession);
   const [saveBtn, setSaveBtn] = useState(false);
-
-  console.log(phoneNumbers);
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -48,16 +48,21 @@ const ListItem = ({
       }
     });
   }
-  function changePhoneNumber(index, phone) {
-    
-    setPhoneNumbers(
-      [
-        {
-          index,
-          phone
+  function changePhoneNumber(i, phone) {
+      phoneNumbers.map((phoneNumber) => {
+        if(phoneNumber.index === i.toString()) {
+          setPhoneNumbers(
+            [...phoneNumbers,
+            {
+            ...phoneNumber,
+            number : phone
+          }
+        ]
+          )
         }
-      ]
-    );
+      })
+    
+   
   }
   const listNormalMode = (
     <div
@@ -93,7 +98,7 @@ const ListItem = ({
       <div className="phone">
         <ul>
           {item.phone.map((number, i) => {
-            return <li key={i}>{number}</li>;
+            return <li key={i}>{number.number}</li>;
           })}
         </ul>
       </div>
@@ -173,10 +178,10 @@ const ListItem = ({
         />
       </div>
       <div className="phone-inline">
-        {phone.map((num, i) => {
+        {phone.map((contact, i) => {
           return (
             <ListItemInputChange
-              num={num}
+              num={contact.number}
               key={i}
               changePhoneNumber={changePhoneNumber}
               index={i}

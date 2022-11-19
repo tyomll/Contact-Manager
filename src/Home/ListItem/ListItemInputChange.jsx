@@ -16,6 +16,7 @@ const ListItemInputChange = ({
           onChange={(e) => {
             setValue(e.target.value);
             changePhoneNumber(index , e.target.value)
+
           }}
         />
       </li>

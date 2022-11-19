@@ -162,8 +162,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
       contacts.filter((contact) => !checkedItems.includes(contact.id)),
       setCheckedItems([])
     );
-
-
   }
   function toggleMode(item) {
     setModalMode(true);
