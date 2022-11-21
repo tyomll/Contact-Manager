@@ -1,5 +1,5 @@
 .edit-modal-bg {
-    background-color: hsla(160,2%,65%,.67);
+    background-color: rgba(254, 254, 254, 0.511);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
     display: flex;
     width: 400px;
     height: 600px;
-    background-color: #F4F8F9;
+    background-color: #ffffff;
     z-index: 4444;
     border-radius: 20px;
     flex-direction: column;
@@ -22,6 +22,9 @@
     justify-content: center;
     -webkit-animation: showSweetAlert .3s;
     animation: showSweetAlert .3s;
+    -webkit-box-shadow: 1px 4px 9px 3px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 1px 4px 9px 3px rgba(34, 60, 80, 0.2);
+box-shadow: 1px 4px 9px 3px rgba(34, 60, 80, 0.2);
 }
 .edit-modal h1{
     font-size: 22px;

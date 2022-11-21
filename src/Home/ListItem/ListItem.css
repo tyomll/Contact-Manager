@@ -24,7 +24,7 @@
   width: 20%;
 }
 .list-item-container > div:nth-child(4) {
-  width: 30%;
+  width: 25%;
 }
 
 .list-item-container > div:nth-child(5) {
@@ -32,7 +32,7 @@
 }
 
 .list-item-container > div:nth-child(6) {
-  width: 15%;
+  width: 20%;
 }
 
 .list-item-container > svg:nth-child(7) {

@@ -2,13 +2,14 @@ import "./Home.css";
 import ListItem from "./ListItem/ListItem";
 import { useEffect, useState } from "react";
 import ListHeader from "./ListHeader/ListHeader";
-import ModalForm from "./ModalForm/ModalForm";
+import ModalForm from "./ListItem/ModalForm/ModalForm";
 import Header from "./Header/Header";
 import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import uuid from "react-uuid";
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState([]);
   const [modalMode, setModalMode] = useState(false);
@@ -52,17 +53,9 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setCheckedItems([]);
     }
   }
-  async function onAdd(id, name, surname, email, phone, profession) {
-    console.log(profession)
+  async function onAdd(contact) {
 
     try {
-      const contact = {
-        firstName: name,
-        lastName: surname,
-        email,
-        phone,
-        profession
-      };
       const response = await axios.post(
         "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
         contact
@@ -70,25 +63,26 @@ const Home = ({ editMode, addMode, viewMode }) => {
       setContactList([
         ...contactList,
         {
-          id: id,
-          firstName: name,
-          lastName: surname,
-          email,
-          phone,
-          profession
+          id: contact.id,
+          firstName: contact.name,
+          lastName: contact.surname,
+          email : contact.email,
+          phone : contact.phone,
+          profession: contact.profession,
         },
       ]);
       updateContacts([
         ...contactList,
         {
-          id: id,
-          firstName: name,
-          lastName: surname,
-          email,
-          phone,
-          profession
+          id: uuid(),
+          firstName: contact.name,
+          lastName: contact.surname,
+          email : contact.email,
+          phone : contact.phone,
+          profession: contact.profession,
         },
       ])
+      fetchUsers()
     }
     catch (error) {
       setError(error)
@@ -112,15 +106,25 @@ const Home = ({ editMode, addMode, viewMode }) => {
     }
   }
   async function onChange(newInfo) {
+    setLoading(true)
     const response = await axios.put(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${newInfo.id}`, newInfo)
-    updateContacts(
-      contactList.map((item) => {
+    setLoading(false)
+    setContactList(
+      contactList.map((item) => {       
         if (item.id === newInfo.id) {
           return newInfo;
         }
         return item;
       })
     );
+    updateContacts(
+      contactList.map((item) => {       
+        if (item.id === newInfo.id) {
+          return newInfo;
+        }
+        return item;
+      })
+    )
   }
   async function onDelete(id) {
     try {
@@ -167,11 +171,17 @@ const Home = ({ editMode, addMode, viewMode }) => {
     setModalMode(true);
     setEditItem(item);
   }
+  
   useEffect(() => {
     fetchUsers();
   }, []);
   return (
+    
     <div className="container-home">
+      {loading && (
+        <div className="lds-dual-ring">
+        </div>
+      )}
       {(modalMode || editItem) && (
         <ModalForm
           mode={mode}
@@ -241,14 +251,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                         {(provided) => (
                           <ListItem
                             reff={provided}
-                            item={item}
-                            id={item.id}
-                            avatar={item.avatar}
-                            firstName={item.firstName}
-                            lastName={item.lastName}
-                            email={item.email}
-                            phone={item.phone}
-                            profession={item.profession}
+                            item={item}                           
                             selectAll={selectAll}
                             checkedItems={checkedItems}
                             editMode={editMode}
@@ -316,10 +319,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setMode={setMode}
         />
       )}
-      {loading && (
-        <div className="lds-dual-ring">
-        </div>
-      )}
+      
     </div>
   );
 };
