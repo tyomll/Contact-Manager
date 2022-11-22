@@ -154,9 +154,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
   }
   async function onDeleteSelected() {
     const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
-    selectedItems.map((id) => {
-      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
-      console.log(id, response)
+    await selectedItems.map((id) => {
+      const response =  axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
     })
     setContactList(
       contactList.filter((contact) => !checkedItems.includes(contact.id)),
@@ -231,6 +230,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
               >
                 {contacts
                   .filter((contact) => {
+                    
                     return searchValue.toLowerCase() === ""
                       ? contact
                       : contact[searchBy].toLowerCase().includes(searchValue);

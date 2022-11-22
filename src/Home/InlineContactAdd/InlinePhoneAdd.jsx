@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faAdd } from "@fortawesome/free-solid-svg-icons";
-const ModalPhoneAdd = ({
+const InlinePhoneAdd = ({
   newContact,
   addNumber,
   addedPhone,
@@ -70,7 +70,7 @@ const ModalPhoneAdd = ({
           <input
             type="text"
             value={value}
-            placeholder={`Phone ${index? index + 1 : 1}`}
+            placeholder={`Phone ${index ? index + 1 : 1}`}
             onChange={(event) => {
               setValue(event.target.value);
               handleNumberChange(event);
@@ -82,4 +82,4 @@ const ModalPhoneAdd = ({
   );
 };
 
-export default ModalPhoneAdd;
+export default InlinePhoneAdd;

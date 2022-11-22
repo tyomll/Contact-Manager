@@ -68,7 +68,7 @@ const ListItemPhoneChange = ({
         <input
           type="text"
           value={value}
-          placeholder="Phone"
+          placeholder={`Phone ${index+1}`}
           onChange={(event) => {
             setValue(event.target.value);
             changeNumber(event);

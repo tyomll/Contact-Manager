@@ -33,6 +33,9 @@ input[type="checkbox"] {
   border-color: rgb(0, 132, 255) transparent rgb(0, 132, 255) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+.container-home{
+  width: 100%;
+}
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);

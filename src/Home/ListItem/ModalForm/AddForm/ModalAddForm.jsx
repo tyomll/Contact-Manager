@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ModalPhoneAdd from "./ModalPhoneAdd";
+import swal from "sweetalert";
 
 const ModalAddForm = ({
   modalMode,
@@ -41,6 +42,7 @@ const ModalAddForm = ({
         <input
           type="text"
           value={newContact.firstName}
+          placeholder="First Name"
           onChange={(e) => {
             setNewContact({ ...newContact, firstName: e.target.value });
           }}
@@ -49,6 +51,7 @@ const ModalAddForm = ({
         <input
           type="text"
           value={newContact.lastName}
+          placeholder="Last Name"
           onChange={(e) => {
             setNewContact({ ...newContact, lastName: e.target.value });
           }}
@@ -57,6 +60,7 @@ const ModalAddForm = ({
         <input
           type="text"
           value={newContact.email}
+          placeholder="Email"
           onChange={(e) => {
             setNewContact({ ...newContact, email: e.target.value });
           }}
@@ -89,6 +93,7 @@ const ModalAddForm = ({
         <input
           type="text"
           value={newContact.profession}
+          placeholder="Profession"
           onChange={(e) => {
             setNewContact({ ...newContact, profession: e.target.value });
           }}
@@ -113,6 +118,9 @@ const ModalAddForm = ({
                 setModalMode(false);
                 setMode(false);
                 onAdd(newContact);
+              }
+              else {
+                swal("Oops Error", "You should fill all fields!", "error");
               }
             }}
           >

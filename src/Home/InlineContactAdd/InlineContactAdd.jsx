@@ -3,91 +3,113 @@ import { useState } from "react";
 import uuid from "react-uuid";
 import swal from "sweetalert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faAdd} from "@fortawesome/free-solid-svg-icons";
+import { faX, faAdd } from "@fortawesome/free-solid-svg-icons";
+import InlinePhoneAdd from "./InlinePhoneAdd";
 
-function InlineContactAdd({ onAdd , setAddInline}) {
-  const [newName, setNewName] = useState("");
-  const [newSurname, setNewSurname] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newPhone, setNewPhone] = useState("");
-  const [newProfession, setNewProfession] = useState("");
+
+function InlineContactAdd({ onAdd, setAddInline }) {
+  const [addedPhone, setAddedPhone] = useState([]);
+  const [newContact, setNewContact] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: addedPhone,
+    profession: "",
+  });
+  function addNumber(e) {
+    setAddedPhone([
+      ...addedPhone,
+      {
+        number: "",
+      },
+    ]);
+  }
   return (
     <div className="contact-add-inline">
       <input
         type="text"
         placeholder="First Name"
-        value={newName}
+        value={newContact.firstName}
         onChange={(e) => {
-          setNewName(e.target.value);
+          setNewContact({ ...newContact, firstName: e.target.value });
         }}
       />
       <input
         type="text"
         placeholder="Last Name"
-        value={newSurname}
+        value={newContact.lastName}
         onChange={(e) => {
-          setNewSurname(e.target.value);
+          setNewContact({ ...newContact, lastName: e.target.value });
         }}
       />
       <input
         type="text"
         placeholder="Email"
-        value={newEmail}
+        value={newContact.email}
         onChange={(e) => {
-          setNewEmail(e.target.value);
+          setNewContact({ ...newContact, email: e.target.value });
         }}
       />
-      <input
-        type="text"
-        placeholder="Phone"
-        value={newPhone}
-        onChange={(e) => {
-          setNewPhone(e.target.value);
-        }}
-      />
+   
+          {addedPhone.length === 0 && (
+            <InlinePhoneAdd
+              newContact={newContact}
+              addNumber={addNumber}
+              addedPhone={addedPhone}
+              setAddedPhone={setAddedPhone}
+              setNewContact={setNewContact}
+            />
+          )}
+          {addedPhone.map((phone, i) => {
+            return (
+              <InlinePhoneAdd
+                key={i}
+                index={i}
+                newContact={newContact}
+                addNumber={addNumber}
+                addedPhone={addedPhone}
+                setAddedPhone={setAddedPhone}
+                setNewContact={setNewContact}
+              />
+            );
+          })}
+   
       <input
         type="text"
         placeholder="Profession"
-        value={newProfession}
+        value={newContact.profession}
         onChange={(e) => {
-          setNewProfession(e.target.value);
+          setNewContact({ ...newContact, profession: e.target.value });
         }}
       />
-      <button onClick={() => {
-        setAddInline(false)
-        setNewName("")
-        setNewSurname("")
-        setNewEmail("")
-        setNewPhone("")
-        setNewProfession("")
-      }}><FontAwesomeIcon icon={faX}></FontAwesomeIcon></button>
       <button
         onClick={() => {
-          if (
-            newName !== "" &&
-            newSurname !== "" &&
-            newEmail !== "" &&
-            newPhone !== "" &&
-            newProfession
-          ) {
-            onAdd(
-              uuid(),
-              newName,
-              newSurname,
-              newEmail,
-              newPhone,
-              newProfession
-            );
-            setNewName("")
-            setNewSurname("")
-            setNewEmail("")
-            setNewPhone("")
-            setNewProfession("")
-          } else {
-            swal("Oops Error", "You should fill all fields!", "error");
-          }
+          setAddInline(false);
         }}
       >
+        <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+      </button>
+      <button onClick={() => {
+        if (
+          Object.keys(newContact).every(
+            (k) => newContact[k] !== ""
+          ) &&
+          Object.keys(addedPhone).every((k) => addedPhone[k].number)
+        ) {
+          onAdd(newContact);
+          setAddedPhone([])
+          setNewContact({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: addedPhone,
+            profession: "",
+          })
+        }
+        else {
+          swal("Oops Error", "You should fill all fields!", "error");
+        }
+      }}>
         <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
       </button>
     </div>

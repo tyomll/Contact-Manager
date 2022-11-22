@@ -34,6 +34,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
         <input
           type="text"
           value={editedContact.firstName}
+          placeholder="First Name"
           onChange={(e) => {
             setEditedContact({ ...editedContact, firstName: e.target.value });
           }}
@@ -42,6 +43,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
         <input
           type="text"
           value={editedContact.lastName}
+          placeholder="Last Name"
           onChange={(e) => {
             setEditedContact({ ...editedContact, lastName: e.target.value });
           }}
@@ -50,6 +52,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
         <input
           type="text"
           value={editedContact.email}
+          placeholder="Email"
           onChange={(e) => {
             setEditedContact({ ...editedContact, email: e.target.value });
           }}
@@ -73,6 +76,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
         <input
           type="text"
           value={editedContact.profession}
+          placeholder="Profession"
           onChange={(e) => {
             setEditedContact({ ...editedContact, profession: e.target.value });
           }}

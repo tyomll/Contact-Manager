@@ -8,9 +8,9 @@
 }
 .contact-add-inline input {
     margin-left: 20px;
-    height: 30px;
-    width: 205px;
-    font-size: 18px;
+    height: 20px;
+    width: 150px;
+    font-size: 15px;
     padding: 3px 3px 3px 3px;
     outline: none;
     border: none;
@@ -18,7 +18,7 @@
     background-color: inherit;
    
 }
-.contact-add-inline button{ 
+/* .contact-add-inline button{ 
     margin-left: 20px;
     width: 30px;
     height: 30px;
@@ -29,5 +29,5 @@
     color: white;
     cursor: pointer;
     font-size: 19px;
-    padding: 5px;
-}
+    padding: 3px;
+} */
