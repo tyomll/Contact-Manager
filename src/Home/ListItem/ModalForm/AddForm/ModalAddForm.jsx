@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ModalPhoneAdd from "./ModalPhoneAdd";
 import swal from "sweetalert";
+import InlinePhoneAdd from "../../../InlineContactAdd/AddContactPhoneChange";
 
 const ModalAddForm = ({
   modalMode,
@@ -67,7 +67,7 @@ const ModalAddForm = ({
         ></input>
         <label>Phone</label>
         {addedPhone.length === 0 && (
-          <ModalPhoneAdd
+          <InlinePhoneAdd
             newContact={newContact}
             addNumber={addNumber}
             addedPhone={addedPhone}
@@ -77,7 +77,7 @@ const ModalAddForm = ({
         )}
         {addedPhone.map((phone, i) => {
           return (
-            <ModalPhoneAdd
+            <InlinePhoneAdd
               key={i}
               index={i}
               newContact={newContact}

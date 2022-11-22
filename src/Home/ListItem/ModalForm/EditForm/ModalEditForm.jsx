@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from "react";
-import ModaltemPhoneEdit from "./ModalItemPhoneEdit";
 import swal from "sweetalert";
+import ListItemPhoneChange from "../../ListItemPhoneChange";
 const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditItem }) => {
   const [editedPhone, setEditedPhone] = useState(
     editItem.phone.map((number) => {
@@ -60,7 +60,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
         <label>Phone</label>
         {editedContact.phone.map((phone, i) => {
           return (
-            <ModaltemPhoneEdit
+            <ListItemPhoneChange
               num={phone.number}
               key={i}
               index={i}

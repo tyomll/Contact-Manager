@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 import swal from "sweetalert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faAdd } from "@fortawesome/free-solid-svg-icons";
-import InlinePhoneAdd from "./InlinePhoneAdd";
+import InlinePhoneAdd from "./AddContactPhoneChange";
 
 
 function InlineContactAdd({ onAdd, setAddInline }) {
