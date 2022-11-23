@@ -18,16 +18,18 @@
     background-color: inherit;
    
 }
-/* .contact-add-inline button{ 
-    margin-left: 20px;
-    width: 30px;
-    height: 30px;
+.contact-add-inline button {
+    margin-left: 5px;
+}
+.contact-add-inline .cancel-btn , .add-btn{ 
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
     border: none;
     outline: none;
     background-color: rgb(0, 132, 255);
     border-radius: 4px;
     color: white;
     cursor: pointer;
-    font-size: 19px;
-    padding: 3px;
-} */
+    font-size: 15px;
+}

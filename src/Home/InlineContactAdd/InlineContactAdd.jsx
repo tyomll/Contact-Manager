@@ -50,7 +50,7 @@ function InlineContactAdd({ onAdd, setAddInline }) {
           setNewContact({ ...newContact, email: e.target.value });
         }}
       />
-   
+       
           {addedPhone.length === 0 && (
             <InlinePhoneAdd
               newContact={newContact}
@@ -73,7 +73,7 @@ function InlineContactAdd({ onAdd, setAddInline }) {
               />
             );
           })}
-   
+    
       <input
         type="text"
         placeholder="Profession"
@@ -82,14 +82,15 @@ function InlineContactAdd({ onAdd, setAddInline }) {
           setNewContact({ ...newContact, profession: e.target.value });
         }}
       />
-      <button
+      <button className="cancel-btn"
         onClick={() => {
           setAddInline(false);
         }}
       >
         <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
       </button>
-      <button onClick={() => {
+      <button className="add-btn"
+       onClick={() => {
         if (
           Object.keys(newContact).every(
             (k) => newContact[k] !== ""

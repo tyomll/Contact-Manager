@@ -1,32 +1,18 @@
 import "./ListItemCardView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
 
 const ListItemCardView = ({
   item,
   id,
-  avatar,
-  firstName,
-  lastName,
-  email,
-  phone,
-  profession,
   onDelete,
   toggleMode,
   onCheck,
   checkedItems,
-  editMode,
-  onChange,
+
 }) => {
-  const [mode, setMode] = useState(true);
-  const [editedName, setEditedName] = useState(item.firstName);
-  const [editedSurname, setEditedSurname] = useState(item.lastName);
-  const [editedEmail, setEditedEmail] = useState(item.email);
-  const [editedPhone, setEditedPhone] = useState(item.phone);
-  const [editedProfession, setEditedProfession] = useState(item.profession);
-  const [saveBtn, setSaveBtn] = useState(false);
+
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -43,30 +29,26 @@ const ListItemCardView = ({
       }
     });
   }
-  const listNormalMode = (
+  return (
     <div className="card">
       <div className="card-avatar">
-        <img className="card-avatar-img" src={avatar} />
+        <img className="card-avatar-img" src={item.avatar} />
       </div>
       <div className="card-name">
-        {firstName}&nbsp;
-        {lastName}
+        {item.firstName}&nbsp;
+        {item.lastName}
       </div>
-      <div className="card-email">{email}</div>
-      <div className="card-phone">{phone}</div>
-      <div className="card-profession">{profession}</div>
+      <div className="card-email">{item.email}</div>
+      <div className="card-phone"><ul>{item.phone.map((phone , i) => {
+        return <li key={i}>{phone.number}</li>
+      })}</ul></div>
+      <div className="card-profession">{item.profession}</div>
       <div className="card-edit-btns">
         <span className="card-edit">
           <FontAwesomeIcon
             icon={faPen}
             onClick={() => {
-              if (editMode === "modal") {
-                setMode(true);
                 toggleMode(id);
-              }
-              if (editMode === "inline") {
-                setMode(false);
-              }
             }}
           />
         </span>
@@ -90,118 +72,6 @@ const ListItemCardView = ({
     </div>
   );
 
-  const listEditMode = (
-    <div className="list-item-container">
-      <input
-        type="checkbox"
-        checked={checkedItems.includes(id)}
-        onChange={(e) => {
-          if (e.target.checked === true) {
-            onCheck(id, true);
-          } else {
-            onCheck(id, false);
-          }
-        }}
-      />
-      <div className="avatar">
-        <img className="avatar-img" src={avatar} />
-      </div>
-      <div className="firstName-inline">
-        <input
-          type="text"
-          value={editedName}
-          placeholder="First Name"
-          onChange={(e) => {
-            setEditedName(e.target.value);
-          }}
-        />
-      </div>
-      <div className="lastName-inline">
-        <input
-          type="text"
-          value={editedSurname}
-          placeholder="Last Name"
-          onChange={(e) => {
-            setEditedSurname(e.target.value);
-          }}
-        />
-      </div>
-      <div className="email-inline">
-        <input
-          type="text"
-          value={editedEmail}
-          placeholder="Email"
-          onChange={(e) => {
-            setEditedEmail(e.target.value);
-          }}
-        />
-      </div>
-      <div className="phone-inline">
-        <input
-          type="text"
-          value={editedPhone}
-          placeholder="Phone"
-          onChange={(e) => {
-            setEditedPhone(e.target.value);
-          }}
-        />
-      </div>
-      <div className="profession-inline">
-        <input
-          type="text"
-          value={editedProfession}
-          placeholder="Profession"
-          onChange={(e) => {
-            setEditedProfession(e.target.value);
-          }}
-        />
-      </div>
-      <div className="edit-btns">
-        <span
-          className="check"
-          style={{ display: saveBtn ? "none" : "inline" }}
-        >
-          <FontAwesomeIcon
-            icon={faCheck}
-            onClick={() => {
-              if (
-                editedName !== "" &&
-                editedSurname !== "" &&
-                editedEmail !== "" &&
-                editedPhone !== "" &&
-                editedProfession
-              ) {
-                setMode(!mode);
-                onChange({
-                  ...item,
-                  firstName: editedName,
-                  lastName: editedSurname,
-                  email: editedEmail,
-                  phone: editedPhone,
-                  profession: editedProfession,
-                });
-              } else {
-                swal("Oops Error", "You should fill all fields!", "error");
-              }
-            }}
-          />
-        </span>
-        <span className="edit" style={{ display: saveBtn ? "inline" : "none" }}>
-          <FontAwesomeIcon
-            icon={faPen}
-            onClick={() => {
-              setSaveBtn(true);
-            }}
-          />
-        </span>
-
-        <span className="delete" onClick={openDeletePopup}>
-          <FontAwesomeIcon icon={faTrash} />
-        </span>
-      </div>
-    </div>
-  );
-  return mode ? listNormalMode : listEditMode;
 };
 
 export default ListItemCardView;

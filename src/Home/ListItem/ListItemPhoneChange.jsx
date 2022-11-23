@@ -54,7 +54,7 @@ const ListItemPhoneChange = ({
     <ul>
       <li>
         {editedContact.phone.length > 1 && (
-          <button onClick={deleteNumber}>
+          <button onClick={deleteNumber} style={{marginRight: "5px"}}>
             <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
           </button>
         )}
@@ -63,6 +63,7 @@ const ListItemPhoneChange = ({
           <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
         </button>
         )}
+
 
         <input
           type="text"

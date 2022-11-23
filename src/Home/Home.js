@@ -66,8 +66,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
           id: contact.id,
           firstName: contact.name,
           lastName: contact.surname,
-          email : contact.email,
-          phone : contact.phone,
+          email: contact.email,
+          phone: contact.phone,
           profession: contact.profession,
         },
       ]);
@@ -77,8 +77,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
           id: uuid(),
           firstName: contact.name,
           lastName: contact.surname,
-          email : contact.email,
-          phone : contact.phone,
+          email: contact.email,
+          phone: contact.phone,
           profession: contact.profession,
         },
       ])
@@ -110,7 +110,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
     const response = await axios.put(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${newInfo.id}`, newInfo)
     setLoading(false)
     setContactList(
-      contactList.map((item) => {       
+      contactList.map((item) => {
         if (item.id === newInfo.id) {
           return newInfo;
         }
@@ -118,7 +118,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
       })
     );
     updateContacts(
-      contactList.map((item) => {       
+      contactList.map((item) => {
         if (item.id === newInfo.id) {
           return newInfo;
         }
@@ -155,7 +155,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
   async function onDeleteSelected() {
     const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
     await selectedItems.map((id) => {
-      const response =  axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
     })
     setContactList(
       contactList.filter((contact) => !checkedItems.includes(contact.id)),
@@ -170,12 +170,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
     setModalMode(true);
     setEditItem(item);
   }
-  
+
   useEffect(() => {
     fetchUsers();
   }, []);
   return (
-    
+
     <div className="container-home">
       {loading && (
         <div className="lds-dual-ring">
@@ -230,10 +230,18 @@ const Home = ({ editMode, addMode, viewMode }) => {
               >
                 {contacts
                   .filter((contact) => {
-                    
-                    return searchValue.toLowerCase() === ""
-                      ? contact
-                      : contact[searchBy].toLowerCase().includes(searchValue);
+                    if ((Object.prototype.toString.call(contact[searchBy]) !== '[object Array]')) {
+                      return searchValue.toLowerCase() === ""
+                        ? contact
+                        : contact[searchBy].toLowerCase().includes(searchValue);
+                    }
+                    else {
+                      if (contact[searchBy].some(e => e.number.includes(searchValue))) {
+                        return searchValue === ""
+                        ? contact
+                        : contact[searchBy].some(e => e.number.includes(searchValue))
+                      }
+                    }
                   })
                   .sort((a, b) => {
                     if (filterAlphabetically === true) {
@@ -251,7 +259,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                         {(provided) => (
                           <ListItem
                             reff={provided}
-                            item={item}                           
+                            item={item}
                             selectAll={selectAll}
                             checkedItems={checkedItems}
                             editMode={editMode}
@@ -278,9 +286,18 @@ const Home = ({ editMode, addMode, viewMode }) => {
         <div className="card-items">
           {contactList
             .filter((contact) => {
-              return searchValue.toLowerCase() === ""
-                ? contact
-                : contact[searchBy].toLowerCase().includes(searchValue);
+              if ((Object.prototype.toString.call(contact[searchBy]) !== '[object Array]')) {
+                return searchValue.toLowerCase() === ""
+                  ? contact
+                  : contact[searchBy].toLowerCase().includes(searchValue);
+              }
+              else {
+                if (contact[searchBy].some(e => e.number.includes(searchValue))) {
+                  return searchValue === ""
+                  ? contact
+                  : contact[searchBy].some(e => e.number.includes(searchValue))
+                }
+              }
             })
             .map((item) => {
               return (
@@ -319,7 +336,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setMode={setMode}
         />
       )}
-      
+
     </div>
   );
 };

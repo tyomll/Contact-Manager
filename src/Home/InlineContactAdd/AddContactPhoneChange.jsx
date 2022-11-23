@@ -54,10 +54,9 @@ const InlinePhoneAdd = ({
 
   return (
     <div>
-      <ul>
-        <li>
+      
           {newContact.phone.length > 1 && (
-            <button onClick={() => deleteNumber()}>
+            <button onClick={() => deleteNumber()} style={{marginRight: "5px"}}>
               <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
             </button>
           )}
@@ -76,8 +75,6 @@ const InlinePhoneAdd = ({
               handleNumberChange(event);
             }}
           />
-        </li>
-      </ul>
     </div>
   );
 };

@@ -1,14 +1,39 @@
 body {
   background-color: #f4f8f9;
 }
+
 input[type="checkbox"] {
   width: 20px;
-    height: 20px;
+  height: 20px;
   background-color: white;
   border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
   outline: none;
   cursor: pointer;
+}
 
+input[type="checkbox"]:checked {
+  background-color: #306fcd;
+  border-color: #306fcd;
+  box-shadow: inset 0 0 0px 4px white;
+}
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+  background-color: #306fcd;
+  border-color: #306fcd;
+  box-shadow: inset 0 0 0px 5px white;
 }
 .lds-dual-ring {
   display: flex;
@@ -21,7 +46,6 @@ input[type="checkbox"] {
   height: 100%;
   z-index: 1000;
   background-color: rgba(254, 254, 254, 0.234);
-
 }
 .lds-dual-ring:after {
   content: " ";
@@ -33,7 +57,7 @@ input[type="checkbox"] {
   border-color: rgb(0, 132, 255) transparent rgb(0, 132, 255) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
-.container-home{
+.container-home {
   width: 100%;
 }
 @keyframes lds-dual-ring {
