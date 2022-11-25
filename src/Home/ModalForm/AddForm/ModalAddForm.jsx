@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
-import InlinePhoneAdd from "../../../InlineContactAdd/AddContactPhoneChange";
+import InlinePhoneAdd from "../../InlineContactAdd/AddContactPhoneChange";
 
 const ModalAddForm = ({
   modalMode,

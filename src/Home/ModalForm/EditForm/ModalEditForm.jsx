@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import swal from "sweetalert";
-import ListItemPhoneChange from "../../ListItemPhoneChange";
+import ListItemPhoneChange from "../../ListItem/ListItemPhoneChange";
+
 const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditItem }) => {
   const [editedPhone, setEditedPhone] = useState(
     editItem.phone.map((number) => {

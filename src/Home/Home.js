@@ -1,15 +1,14 @@
 import "./Home.css";
-import ListItem from "./ListItem/ListItem";
 import { useEffect, useState } from "react";
+import ListItem from "./ListItem/ListItem"
 import ListHeader from "./ListHeader/ListHeader";
-import ModalForm from "./ListItem/ModalForm/ModalForm";
+import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
 import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
-import uuid from "react-uuid";
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState([]);
   const [modalMode, setModalMode] = useState(false);
@@ -60,27 +59,14 @@ const Home = ({ editMode, addMode, viewMode }) => {
         "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
         contact
       );
+      console.log(contact , response.data, response.data.id)
       setContactList([
         ...contactList,
-        {
-          id: contact.id,
-          firstName: contact.name,
-          lastName: contact.surname,
-          email: contact.email,
-          phone: contact.phone,
-          profession: contact.profession,
-        },
+        response.data,
       ]);
       updateContacts([
         ...contactList,
-        {
-          id: uuid(),
-          firstName: contact.name,
-          lastName: contact.surname,
-          email: contact.email,
-          phone: contact.phone,
-          profession: contact.profession,
-        },
+        response.data,
       ])
       fetchUsers()
     }
@@ -153,18 +139,23 @@ const Home = ({ editMode, addMode, viewMode }) => {
     updateContacts(items);
   }
   async function onDeleteSelected() {
+
     const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
-    await selectedItems.map((id) => {
+    selectedItems.map((id) => {
       const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+      console.log(id)
     })
-    setContactList(
-      contactList.filter((contact) => !checkedItems.includes(contact.id)),
-      setCheckedItems([])
-    );
     updateContacts(
       contacts.filter((contact) => !checkedItems.includes(contact.id)),
       setCheckedItems([])
     );
+    setContactList(
+      contactList.filter((contact) => !checkedItems.includes(contact.id)),
+      setCheckedItems([])
+    );
+    
+
+
   }
   function toggleMode(item) {
     setModalMode(true);
@@ -186,7 +177,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
           mode={mode}
           setMode={setMode}
           setEditItem={setEditItem}
-          contactList={contactList}
           setModalMode={setModalMode}
           editItem={editItem}
           modalMode={modalMode}
@@ -238,8 +228,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
                     else {
                       if (contact[searchBy].some(e => e.number.includes(searchValue))) {
                         return searchValue === ""
-                        ? contact
-                        : contact[searchBy].some(e => e.number.includes(searchValue))
+                          ? contact
+                          : contact[searchBy].some(e => e.number.includes(searchValue))
                       }
                     }
                   })
@@ -253,7 +243,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                     return (
                       <Draggable
                         key={item.id}
-                        draggableId={item.id.toString()}
+                        draggableId={item.id}
                         index={index}
                       >
                         {(provided) => (
@@ -294,8 +284,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
               else {
                 if (contact[searchBy].some(e => e.number.includes(searchValue))) {
                   return searchValue === ""
-                  ? contact
-                  : contact[searchBy].some(e => e.number.includes(searchValue))
+                    ? contact
+                    : contact[searchBy].some(e => e.number.includes(searchValue))
                 }
               }
             })
@@ -305,17 +295,7 @@ const Home = ({ editMode, addMode, viewMode }) => {
                   item={item}
                   key={item.id}
                   id={item.id}
-                  avatar={item.avatar}
-                  firstName={item.firstName}
-                  lastName={item.lastName}
-                  email={item.email}
-                  phone={item.phone}
-                  profession={item.profession}
-                  selectAll={selectAll}
                   checkedItems={checkedItems}
-                  editMode={editMode}
-                  setContactList={setContactList}
-                  contactList={contactList}
                   onCheck={onCheck}
                   toggleMode={() => {
                     toggleMode(item);
