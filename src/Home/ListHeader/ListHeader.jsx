@@ -8,6 +8,8 @@ const ListHeader = ({
   viewMode,
   filterAlphabetically,
   setFilterAlphabetically,
+  setSortBy,
+  sortBy,
 }) => {
   return (
     <>
@@ -49,21 +51,75 @@ const ListHeader = ({
             }}
           />
         </div>
+        <div className="list-header-breaker"></div>
         <div className="header-name">
-          <p>name</p>
+          <p>
+            name
+            <span
+              style={{
+                color: sortBy === "firstName" ? "rgb(39 170 249)" : "#678796",
+              }}
+              className="filter-alphabetically"
+              onClick={() => {
+                if (sortBy === null) {
+                  setSortBy("firstName");
+                } else {
+                  setSortBy(null);
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
+            </span>
+          </p>
         </div>
         <div className="header-email">
-          <p>email</p>
+          <p>
+            email
+            <span
+              style={{
+                color: sortBy === "lastName" ? "rgb(39 170 249)" : "#678796",
+              }}
+              className="filter-alphabetically"
+              onClick={() => {
+                if (sortBy === null) {
+                  setSortBy("lastName");
+                } else {
+                  setSortBy(null);
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
+            </span>
+          </p>
         </div>
         <div className="header-phone">
           <p>phone</p>
         </div>
         <div className="header-profession">
-          <p>profession</p>
+          <p>
+            profession
+            <span
+              style={{
+                color: sortBy === "profession" ? "rgb(39 170 249)" : "#678796",
+              }}
+              className="filter-alphabetically"
+              onClick={() => {
+                if (sortBy === null) {
+                  setSortBy("profession");
+                } else {
+                  setSortBy(null);
+                }
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
+            </span>
+          </p>
         </div>
         <div className="filter">
           <span
-            style={{color : filterAlphabetically ? "rgb(39 170 249)" : "#678796"}}
+            style={{
+              color: filterAlphabetically ? "rgb(39 170 249)" : "#678796",
+            }}
             className="filter-alphabetically"
             onClick={() => {
               setFilterAlphabetically(!filterAlphabetically);

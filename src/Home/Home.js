@@ -1,6 +1,6 @@
 import "./Home.css";
 import { useEffect, useState } from "react";
-import ListItem from "./ListItem/ListItem"
+import ListItem from "./ListItem/ListItem";
 import ListHeader from "./ListHeader/ListHeader";
 import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
@@ -9,6 +9,7 @@ import ListItemCardView from "./ListItemCardView/ListItemCardView";
 import NoContacts from "../NoContacts/NoContacts";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import Pagination from "./Pagination/Pagination";
 const Home = ({ editMode, addMode, viewMode }) => {
   const [contactList, setContactList] = useState([]);
   const [modalMode, setModalMode] = useState(false);
@@ -19,19 +20,21 @@ const Home = ({ editMode, addMode, viewMode }) => {
   const [addInline, setAddInline] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
+  const [sortBy, setSortBy] = useState(null);
   const [filterAlphabetically, setFilterAlphabetically] = useState(false);
   const [contacts, updateContacts] = useState(contactList);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(false);
+  const [pageIndex, setPageIndex] = useState(1);
+  const [onePageUserCount, setOnePageUserCount] = useState(7)
   async function fetchUsers() {
     try {
-      setLoading(true)
+      setLoading(true);
       setError("");
       const response = await axios.get(
         "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users"
       );
-      setLoading(false)
+      setLoading(false);
       const users = response.data;
       setContactList(users);
       updateContacts(users);
@@ -53,27 +56,18 @@ const Home = ({ editMode, addMode, viewMode }) => {
     }
   }
   async function onAdd(contact) {
-
     try {
       const response = await axios.post(
         "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users",
         contact
       );
-      console.log(contact , response.data, response.data.id)
-      setContactList([
-        ...contactList,
-        response.data,
-      ]);
-      updateContacts([
-        ...contactList,
-        response.data,
-      ])
-      fetchUsers()
+      console.log(contact, response.data, response.data.id);
+      setContactList([...contactList, response.data]);
+      updateContacts([...contactList, response.data]);
+      fetchUsers();
+    } catch (error) {
+      setError(error);
     }
-    catch (error) {
-      setError(error)
-    }
-
   }
   function onCheck(id, isChecked) {
     if (isChecked === false) {
@@ -92,9 +86,12 @@ const Home = ({ editMode, addMode, viewMode }) => {
     }
   }
   async function onChange(newInfo) {
-    setLoading(true)
-    const response = await axios.put(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${newInfo.id}`, newInfo)
-    setLoading(false)
+    setLoading(true);
+    const response = await axios.put(
+      `https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${newInfo.id}`,
+      newInfo
+    );
+    setLoading(false);
     setContactList(
       contactList.map((item) => {
         if (item.id === newInfo.id) {
@@ -110,24 +107,25 @@ const Home = ({ editMode, addMode, viewMode }) => {
         }
         return item;
       })
-    )
+    );
   }
   async function onDelete(id) {
     try {
-      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
+      const response = axios.delete(
+        `https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`
+      );
       setContactList(
         contactList.filter((contact) => {
           return contact.id !== id;
         })
-      )
+      );
       updateContacts(
         contactList.filter((contact) => {
           return contact.id !== id;
         })
-      )
-    }
-    catch (error) {
-      setError(error)
+      );
+    } catch (error) {
+      setError(error);
     }
   }
   function handleOnDragEnd(result) {
@@ -139,12 +137,15 @@ const Home = ({ editMode, addMode, viewMode }) => {
     updateContacts(items);
   }
   async function onDeleteSelected() {
-
-    const selectedItems = contacts.filter((contact => checkedItems.includes(contact.id))).map(contact => contact.id)
+    const selectedItems = contacts
+      .filter((contact) => checkedItems.includes(contact.id))
+      .map((contact) => contact.id);
     selectedItems.map((id) => {
-      const response = axios.delete(`https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`)
-      console.log(id)
-    })
+      const response = axios.delete(
+        `https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/users/${id}`
+      );
+      console.log(id);
+    });
     updateContacts(
       contacts.filter((contact) => !checkedItems.includes(contact.id)),
       setCheckedItems([])
@@ -153,9 +154,6 @@ const Home = ({ editMode, addMode, viewMode }) => {
       contactList.filter((contact) => !checkedItems.includes(contact.id)),
       setCheckedItems([])
     );
-    
-
-
   }
   function toggleMode(item) {
     setModalMode(true);
@@ -166,12 +164,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
     fetchUsers();
   }, []);
   return (
-
     <div className="container-home">
-      {loading && (
-        <div className="lds-dual-ring">
-        </div>
-      )}
+      {loading && <div className="lds-dual-ring"></div>}
       {(modalMode || editItem) && (
         <ModalForm
           mode={mode}
@@ -208,6 +202,8 @@ const Home = ({ editMode, addMode, viewMode }) => {
         viewMode={viewMode}
         filterAlphabetically={filterAlphabetically}
         setFilterAlphabetically={setFilterAlphabetically}
+        setSortBy={setSortBy}
+        sortBy={sortBy}
       />
       {viewMode === "list" && (
         <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -219,27 +215,45 @@ const Home = ({ editMode, addMode, viewMode }) => {
                 {...provided.droppableProps}
               >
                 {contacts
+                  .filter((contact, i) => {
+                    if (pageIndex >= 2) {
+                      if (i >= onePageUserCount) {
+                        return contact;
+                      }
+                    } else {
+                      if (i < onePageUserCount) {
+                        return contact;
+                      }
+                    }
+                  })
                   .filter((contact) => {
-                    if ((Object.prototype.toString.call(contact[searchBy]) !== '[object Array]')) {
+                    if (
+                      Object.prototype.toString.call(contact[searchBy]) !==
+                      "[object Array]"
+                    ) {
                       return searchValue.toLowerCase() === ""
                         ? contact
                         : contact[searchBy].toLowerCase().includes(searchValue);
-                    }
-                    else {
-                      if (contact[searchBy].some(e => e.number.includes(searchValue))) {
+                    } else {
+                      if (
+                        contact[searchBy].some((e) =>
+                          e.number.includes(searchValue)
+                        )
+                      ) {
                         return searchValue === ""
                           ? contact
-                          : contact[searchBy].some(e => e.number.includes(searchValue))
+                          : contact[searchBy].some((e) =>
+                              e.number.includes(searchValue)
+                            );
                       }
                     }
                   })
                   .sort((a, b) => {
-                    if (filterAlphabetically === true) {
-                      return a.firstName.localeCompare(b.firstName);
+                    if (sortBy !== null) {
+                      return a[sortBy].localeCompare(b[sortBy]);
                     }
                   })
                   .map((item, index) => {
-
                     return (
                       <Draggable
                         key={item.id}
@@ -276,16 +290,22 @@ const Home = ({ editMode, addMode, viewMode }) => {
         <div className="card-items">
           {contactList
             .filter((contact) => {
-              if ((Object.prototype.toString.call(contact[searchBy]) !== '[object Array]')) {
+              if (
+                Object.prototype.toString.call(contact[searchBy]) !==
+                "[object Array]"
+              ) {
                 return searchValue.toLowerCase() === ""
                   ? contact
                   : contact[searchBy].toLowerCase().includes(searchValue);
-              }
-              else {
-                if (contact[searchBy].some(e => e.number.includes(searchValue))) {
+              } else {
+                if (
+                  contact[searchBy].some((e) => e.number.includes(searchValue))
+                ) {
                   return searchValue === ""
                     ? contact
-                    : contact[searchBy].some(e => e.number.includes(searchValue))
+                    : contact[searchBy].some((e) =>
+                        e.number.includes(searchValue)
+                      );
                 }
               }
             })
@@ -316,7 +336,13 @@ const Home = ({ editMode, addMode, viewMode }) => {
           setMode={setMode}
         />
       )}
-
+      <Pagination
+        contactList={contactList}
+        pageIndex={pageIndex}
+        setPageIndex={setPageIndex}
+        onePageUserCount={onePageUserCount}
+        setOnePageUserCount={setOnePageUserCount}
+      />
     </div>
   );
 };

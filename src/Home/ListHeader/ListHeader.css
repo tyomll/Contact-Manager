@@ -1,49 +1,91 @@
-.list-header{
-    display: flex;
-    height: 30px;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    align-items: center;
-    color: #678796;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-top: 20px;
+.list-header {
+  display: flex;
+  height: 30px;
+  position: relative;
+  align-items: center;
+  color: #678796;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 20px;
+  flex-direction: row;
+  margin: 20px 0px 20px 0px;
+  padding: 0px 10px;
 }
-.card-view-header{
-    display: flex;
-    height: 30px;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    align-items: center;
-    color: #678796;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-top: 20px;
+.card-view-header {
+  display: flex;
+  height: 30px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  color: #678796;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 20px;
 }
-#root > div > div.card-view-header > div > p{  
-    margin-left: 10px;
+#root > div > div.card-view-header > div > p {
+  margin-left: 10px;
 }
-.header-checkbox{
-    width: 5.7%;
+.header-checkbox {
+  margin-left: 10px;
 }
-.header-name{
-    width: 10%;
+.list-header-breaker {
+  width: 9%;
 }
-.header-email{
-    width: 30%;
+.header-name {
+  width: 18%;
 }
-.header-phone{
-    width: 28%;
+.header-email {
+  width: 27%;
 }
-.header-profession{
-    margin-left: -20px;
+.header-phone {
+    width: 17%;
 }
-.filter{
-    margin-left: 170px;
+.header-profession {
+    width: 15%;
 }
-.filter-alphabetically{
-    font-size: 20px;
-    cursor: pointer;
+.filter {
+  margin-left: 170px;
 }
+.filter-alphabetically {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 1268px) {
+    .list-header-breaker {
+        width:12%;
+      }
+    .header-name {
+        width: 25%;
+      }
+      .header-email {
+        width: 38%;
+      }
+      .header-phone {
+          width: 24%;
+      }
+      .header-profession {
+          width: 12%;
+      }
+  }
+  
+  @media (max-width: 1090px) {
+    .list-header-breaker {
+        width:13%;
+      }
+      .header-name {
+        width: 25%;
+      }
+      .header-email {
+
+      }
+      .header-phone {
+          width: 20%;
+      }
+      .header-profession {
+          width: 9%;
+      }
+   
+  }
+  
