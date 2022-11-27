@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from "react";
 import swal from "sweetalert";
-import ListItemPhoneChange from "../../ListItem/ListItemPhoneChange";
+import ListItemPhoneChange from "../../ContactList/ContactListItem/ListItemPhoneChange";
 
 const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditItem }) => {
   const [editedPhone, setEditedPhone] = useState(

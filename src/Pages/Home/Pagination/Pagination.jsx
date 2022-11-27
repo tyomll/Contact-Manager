@@ -1,13 +1,17 @@
 import React from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 import "./Pagination.css";
 const Pagination = ({
   contactList,
   pageIndex,
   onePageUserCount,
   setOnePageUserCount,
-  setPageIndex,
+  setCurrentPage,
+  currentPosts,
+  firstContactIndex,
+  lastContactIndex,
 }) => {
+  console.log(lastContactIndex);
   return (
     <div className="pagination">
       <div className="flex items-center justify-between border-gray-200 px-4 py-3 sm:px-6">
@@ -28,9 +32,14 @@ const Pagination = ({
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
             <p className="text-sm text-gray-700">
-              Showing <span className="font-medium">1</span> to{" "}
-              <span className="font-medium">7</span> of{" "}
-              <span className="font-medium">{contactList.length}</span> results
+              Showing{" "}
+              <span className="font-medium">{firstContactIndex + 1}</span> to{" "}
+              <span className="font-medium">
+                {contactList[contactList.length-1] ? contactList[contactList.length - 1].id !==
+                  currentPosts[currentPosts.length - 1].id ? lastContactIndex : contactList.length : null} 
+              </span>{" "}
+              of <span className="font-medium">{contactList.length}</span>{" "}
+              results
             </p>
           </div>
           <div>
@@ -41,22 +50,30 @@ const Pagination = ({
               <a
                 href="#"
                 className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+                onClick={() => {
+                  setCurrentPage(pageIndex - 1);
+                }}
               >
                 <span className="sr-only">Previous</span>
                 <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
               </a>
-              {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
               {contactList.map((contact, i) => {
-                let pageCount = Math.floor(contactList.length / 7);
-                if (i <= pageCount) {
+                let pageCount = Math.ceil(
+                  contactList.length / onePageUserCount
+                );
+                if (i <= pageCount - 1) {
                   return (
                     <a
                       key={i}
                       href="#"
                       aria-current="page"
-                      className={`relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20`}
+                      className={`relative z-10 inline-flex items-center border border-gray-200 text-gray-500 hover:bg-gray-50 bg-white px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20 ${
+                        pageIndex === i + 1
+                          ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600"
+                          : ""
+                      }`}
                       onClick={() => {
-                        setPageIndex(i + 1);
+                        setCurrentPage(i + 1);
                       }}
                     >
                       {i + 1}
@@ -64,13 +81,16 @@ const Pagination = ({
                   );
                 }
               })}
-              <input
-                type="number"
-                value={onePageUserCount}
-                onChange={(e) => {
-                    setOnePageUserCount(e.target.value)
-                }}
-              />
+              <div className="contacts-count-per-page">
+                <span>Contacts Per Page</span>
+                <input
+                  type="number"
+                  value={onePageUserCount}
+                  onChange={(e) => {
+                    setOnePageUserCount(e.target.value);
+                  }}
+                />
+              </div>
             </nav>
           </div>
         </div>
