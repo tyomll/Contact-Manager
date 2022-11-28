@@ -1,19 +1,35 @@
-.pagination{
-    display: flex;
-  justify-content: center;   
+.pagination {
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
 }
-.contacts-count-per-page{
+.contacts-count-per-page {
   position: absolute;
   right: 20px;
   width: fit-content;
+  word-break: break-all;
 }
 .contacts-count-per-page span {
   margin-right: 20px;
 }
-.contacts-count-per-page input{
+.contacts-count-per-page input {
   width: 50px;
   background-color: rgb(230, 230, 230);
   padding: 2px;
   border: 1px solid rgb(181, 181, 181);
   outline: none;
+}
+@media (max-width: 910px) {
+  .pagination {
+    display: flex;
+    justify-content: flex-start;
+    width: fit-content;
+  }
+  .contacts-count-per-page {
+      font-size: 14px;
+  }
+  .contacts-count-per-page input {
+    width: 35px;
+  }
+  
 }

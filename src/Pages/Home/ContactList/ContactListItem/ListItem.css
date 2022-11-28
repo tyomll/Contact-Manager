@@ -22,15 +22,22 @@
 }
 .name {
   width: 15%;
+  word-break: break-word;
 }
 .email {
   width: 24%;
+  word-break: break-word;
+
 }
 .phone {
   width: 14%;
+  word-break: break-word;
+
 }
 .profession {
   width: 20%;
+  word-break: break-word;
+
 }
 .list-item-container > svg:nth-child(7) {
   width: 5%;
@@ -141,5 +148,46 @@ a{
   }
   .list-item-container {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 820px) {
+
+  .avatar{
+    position: absolute;
+    margin-left: 40px;
+  }
+  .name{
+    position: absolute;
+    margin-left: 90px;
+    width: fit-content;
+  }
+  .email {
+    display: none;
+  }
+  .phone {
+    display: none;
+  }
+  .profession {
+    display: none;
+  }
+}
+
+@media (max-width: 460px) {
+
+  .avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: none;
+  }
+  .name{
+    position: static;
+    margin: 0;
+    font-size: 13px;
+    word-break: break-all;
+  }
+  .list-item-container {
+    justify-content: space-between;
   }
 }

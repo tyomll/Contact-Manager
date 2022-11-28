@@ -43,3 +43,17 @@
     color: white;
     border: none;
 }
+.contact-page-back{
+    position: absolute;
+    top: 50px;
+    left: 150px;
+    background-color: rgb(41, 58, 114);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}

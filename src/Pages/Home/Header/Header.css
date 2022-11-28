@@ -1,98 +1,131 @@
-.header-container{
-    display: flex;
-    flex-direction: row;
-    height: 50px;
-    align-items: center;
-    margin-top: 40px;
-    justify-content: space-between;
+.header-container {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  align-items: center;
+  margin-top: 40px;
+  justify-content: space-between;
 }
-.header-tools{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+.header-tools {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
-.header-container h1{
-    color: #1987cb;
-    font-weight: 600;
-    font-size: 30px;
+.header-container h1 {
+  color: #1987cb;
+  font-weight: 600;
+  font-size: 30px;
 }
-.add-contact-btn{
-    background-color: #27AAF9;
-    width: 150px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 14px;
-    transition: 0.3s;
+.add-contact-btn {
+  background-color: #27aaf9;
+  width: 150px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+  transition: 0.3s;
 }
-.add-contact-btn:hover{
-    background-color: #1687cd;
+.add-contact-btn:hover {
+  background-color: #1687cd;
 }
-.add-contact-btn-icon{
-    margin-right: 10px;
+.add-contact-btn-icon {
+  margin-right: 10px;
 }
-.add-contact-btn span{
-    color: white;
+.add-contact-btn span {
+  color: white;
 }
-.delete-contact-btn{
-    background-color: #d9d8d8;
-    width: 180px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    font-size: 14px;
+.delete-contact-btn {
+  background-color: #d9d8d8;
+  width: 180px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 14px;
 }
-.delete-contact-btn-icon{
-    margin-right: 10px;
+.delete-contact-btn-icon {
+  margin-right: 10px;
 }
-.delete-contact-btn span{
-    color: white;
+.delete-contact-btn span {
+  color: white;
 }
-.search-input{
-    right: 470px;
-    display: flex;
+.search-input {
+  right: 470px;
+  display: flex;
 }
 .search-input input {
-    height: 25px;
-    width: 230px;
-    outline: none;
-    padding: 5px 5px 5px 5px;
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: inherit;
-    -webkit-animation: showSweetAlert .3s;
-    animation: showSweetAlert .3s;
+  height: 25px;
+  width: 230px;
+  outline: none;
+  padding: 5px 5px 5px 5px;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: inherit;
+  -webkit-animation: showSweetAlert 0.3s;
+  animation: showSweetAlert 0.3s;
 }
-.search-contact-btn{
-    background-color: #d9d8d8;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    cursor: pointer;
-
+.search-contact-btn {
+  background-color: #d9d8d8;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.search-by-select{
-    background-color: inherit;
-    outline: none;
-    width: 110px;
-    text-align: center;
-    -webkit-animation: showSweetAlert .3s;
-    animation: showSweetAlert .3s;
+.search-by-select {
+  background-color: inherit;
+  outline: none;
+  width: 110px;
+  text-align: center;
+  -webkit-animation: showSweetAlert 0.3s;
+  animation: showSweetAlert 0.3s;
 }
-.search-by-select select{
-    background-color: white;
-    outline: none;
-    width: 110px;
-    height: 25px;
+.search-by-select select {
+  background-color: white;
+  outline: none;
+  width: 110px;
+  height: 25px;
+}
+@media (max-width: 1064px) {
+  /* .header-tools {
+    flex-direction: column;
+  } */
+  .add-contact-btn{
+    width: 50px;
+  }
+  .add-contact-btn span{
+    display: none;
+    width: 100px;
+  }
+  .delete-contact-btn {
+    width: 50px;
+  }
+  .delete-contact-btn span{
+    display: none;
+  }
+  .search-input input {
+    width: 120px;
+    font-size: 11.5px;
+  }
+  .search-by-select {
+    width: 80px;
+  }
+  .search-by-select select {
+    width: 80px;
+    font-size: 11px;
+  }
+}
+@media (max-width : 690px){
+    .search-contact-btn {
+       display: none;
+      }
 }

@@ -103,7 +103,7 @@ const ContactList = ({
       )}
       {viewMode === "card" && (
         <div className="card-items">
-          {contactList
+          {currentPosts
             .filter((contact) => {
               if (
                 Object.prototype.toString.call(contact[searchBy]) !==
@@ -137,6 +137,7 @@ const ContactList = ({
                   }}
                   onChange={onChange}
                   onDelete={onDelete}
+                  editMode={editMode}
                 />
               );
             })}

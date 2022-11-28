@@ -2,6 +2,7 @@ import "./ListItemCardView.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const ListItemCardView = ({
   item,
@@ -10,9 +11,8 @@ const ListItemCardView = ({
   toggleMode,
   onCheck,
   checkedItems,
-
+  editMode,
 }) => {
-
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -39,20 +39,29 @@ const ListItemCardView = ({
         {item.lastName}
       </div>
       <div className="card-email">{item.email}</div>
-      <div className="card-phone"><ul>{item.phone.map((phone , i) => {
-        return <li key={i}>{phone.number}</li>
-      })}</ul></div>
+      <div className="card-phone">
+        <ul>
+          {item.phone.map((phone, i) => {
+            return <li key={i}>{phone.number}</li>;
+          })}
+        </ul>
+      </div>
       <div className="card-profession">{item.profession}</div>
       <div className="card-edit-btns">
-        <span className="card-edit">
-          <FontAwesomeIcon
-            icon={faPen}
-            onClick={() => {
+        {editMode === "modal" ? (
+          <span className="card-edit">
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
                 toggleMode(id);
-            }}
-          />
-        </span>
-
+              }}
+            />
+          </span>
+        ) : (
+          <Link to={`contacts/${id}`}>
+            <FontAwesomeIcon icon={faPen} />
+          </Link>
+        )}
         <span className="card-delete" onClick={openDeletePopup}>
           <FontAwesomeIcon icon={faTrash} />
         </span>
@@ -71,7 +80,6 @@ const ListItemCardView = ({
       />
     </div>
   );
-
 };
 
 export default ListItemCardView;

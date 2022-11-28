@@ -18,7 +18,7 @@ const Navigation = () => {
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+      } bg-dark-purple h-screen p-5 pt-8 relative duration-300 `}
     >
       <img
         src="https://raw.githubusercontent.com/Sridhar-C-25/sidebar_reactTailwind/main/src/assets/control.png"
