@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import ListItemCardView from "./ContactItemCardView/ListItemCardView";
 import ListItem from "./ContactListItem/ListItem";
@@ -20,12 +20,12 @@ const ContactList = ({
   onDelete,
   currentPosts,
 }) => {
+
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(contacts);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
     updateContacts(items);
   }
 

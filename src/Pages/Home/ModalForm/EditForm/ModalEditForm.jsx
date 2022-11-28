@@ -1,8 +1,14 @@
-import React, { useState , useEffect} from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import ListItemPhoneChange from "../../ContactList/ContactListItem/ListItemPhoneChange";
 
-const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditItem }) => {
+const ModalEditForm = ({
+  modalMode,
+  setModalMode,
+  editItem,
+  onChange,
+  setEditItem,
+}) => {
   const [editedPhone, setEditedPhone] = useState(
     editItem.phone.map((number) => {
       return number;
@@ -18,7 +24,6 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
     profession: editItem.profession,
   });
 
-  
   return (
     <div
       className="edit-modal-bg"
@@ -83,11 +88,15 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
           }}
         ></input>
         <div className="modal-btns">
-          <button onClick={() => {
-            setModalMode(false)
-            setEditItem(undefined)
-            setEditedContact(editItem)
-            }}>Cancel</button>
+          <button
+            onClick={() => {
+              setModalMode(false);
+              setEditItem(undefined);
+              setEditedContact(editItem);
+            }}
+          >
+            Cancel
+          </button>
           <button
             onClick={() => {
               if (
@@ -96,7 +105,7 @@ const ModalEditForm = ({ modalMode, setModalMode, editItem, onChange , setEditIt
                 ) &&
                 Object.keys(editedPhone).every((k) => editedPhone[k].number)
               ) {
-                setEditItem(undefined)
+                setEditItem(undefined);
                 setModalMode(false);
                 setEditedContact({ ...editedContact, phone: editedPhone });
                 onChange(editedContact);

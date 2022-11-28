@@ -2,7 +2,7 @@ import "./ListItem.css";
 import { useState } from "react";
 import swal from "sweetalert";
 import ListItemNormalMode from "./ListItemNormalMode";
-import ListItemEditMode from "./ListItemEditMode";
+
 
 const ListItem = ({
   item,
@@ -11,10 +11,8 @@ const ListItem = ({
   checkedItems,
   toggleMode,
   onCheck,
-  onChange,
   onDelete,
 }) => {
-  const [mode, setMode] = useState(true);
   
   function openDeletePopup() {
     swal({
@@ -33,7 +31,7 @@ const ListItem = ({
     });
   }
 
-  return mode ? (
+  return (
     <ListItemNormalMode
       id={item.id}
       checkedItems={checkedItems}
@@ -41,25 +39,11 @@ const ListItem = ({
       onCheck={onCheck}
       item={item}
       editMode={editMode}
-      setMode={setMode}
       toggleMode={toggleMode}
       openDeletePopup={openDeletePopup}
     />
-  ) : (
-    <ListItemEditMode
-      id={item.id}
-      checkedItems={checkedItems}
-      reff={reff}
-      onCheck={onCheck}
-      item={item}
-      editMode={editMode}
-      setMode={setMode}
-      toggleMode={toggleMode}
-      openDeletePopup={openDeletePopup}
-      mode={mode}
-      onChange={onChange}
-    />
-  );
+  ) 
+  
 };
 
 export default ListItem;

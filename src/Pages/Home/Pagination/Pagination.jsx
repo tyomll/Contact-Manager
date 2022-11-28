@@ -11,7 +11,6 @@ const Pagination = ({
   firstContactIndex,
   lastContactIndex,
 }) => {
-  console.log(lastContactIndex);
   return (
     <div className="pagination">
       <div className="flex items-center justify-between border-gray-200 px-4 py-3 sm:px-6">

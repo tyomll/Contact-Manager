@@ -1,6 +1,5 @@
 import "./InlineContactAdd.css";
 import { useState } from "react";
-import uuid from "react-uuid";
 import swal from "sweetalert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faAdd } from "@fortawesome/free-solid-svg-icons";

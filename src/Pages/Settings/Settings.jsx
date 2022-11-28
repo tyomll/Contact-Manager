@@ -1,5 +1,5 @@
 import "./Settings.css";
-import swal from "sweetalert";
+
 function Settings({
   setEditMode,
   editMode,
@@ -9,32 +9,15 @@ function Settings({
   viewMode,
 }) {
   const handleEditChange = (e) => {
-    if (viewMode === "card" && e.target.value === "inline") {
-      swal(
-        "Oops Error",
-        "You can't use inline edit mode in card view mode",
-        "error"
-      );
-    } else {
-      setEditMode(e.target.value);
-    }
+    setEditMode(e.target.value);
   };
   const handleAddChange = (e) => {
     setAddMode(e.target.value);
   };
   const handleViewModeChange = (e) => {
-    if (e.target.value === "card" && editMode === "inline") {
-      setEditMode("modal");
-      setViewMode(e.target.value);
-      swal(
-        "Oops Error",
-        "You can't use inline edit mode in card view mode",
-        "error"
-      );
-    } else {
-      setViewMode(e.target.value);
-    }
+    setViewMode(e.target.value);
   };
+
   return (
     <div className="settings-page-container">
       <div className="settings-toggles">
@@ -42,13 +25,13 @@ function Settings({
           <h3 className="settings-heading">Edit Contact Type</h3>
         </div>
         <div className="edit-type">
-          <div className="inline-edit">
-            <label>Inline Edit</label>
+          <div className="page-edit">
+            <label>On Page</label>
             <input
-              name="inline-edit"
+              name="page-edit"
               type="radio"
-              value="inline"
-              checked={editMode === "inline"}
+              value="page"
+              checked={editMode === "page"}
               onChange={handleEditChange}
             />
           </div>

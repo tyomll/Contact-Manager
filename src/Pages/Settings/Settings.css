@@ -1,95 +1,92 @@
-.settings-page-container{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 90vh;
+.settings-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 90vh;
 }
-.edit-type{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top:10px;
+.edit-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
 }
-.edit-type > input{
-   margin-left: 50px;
+.edit-type > input {
+  margin-left: 50px;
 }
-.inline-edit{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.page-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.modal-edit{
-    display: flex;
-    flex-direction: column;
-    margin-left: 100px;
-    align-items: center;
+.modal-edit {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  align-items: center;
 }
-.settings-page-heading{
-    font-size: 50px;
-    font-weight: 700;
-    
-    margin-top: 10px;
+.settings-page-heading {
+  font-size: 50px;
+  font-weight: 700;
 
+  margin-top: 10px;
 }
-.settings-page-container > span{
-    color: rgb(81, 82, 83);
-    font-size: 17px;
+.settings-page-container > span {
+  color: rgb(81, 82, 83);
+  font-size: 17px;
 }
-.add-type{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-    justify-content: center;
+.add-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: center;
 }
-.inline-add{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.inline-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.modal-add{
-    display: flex;
-    flex-direction: column;
-    margin-left: 100px;
-    align-items: center;
+.modal-add {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  align-items: center;
 }
-.contacts-view{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
+.contacts-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.card-view{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.card-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.list-view{
-    display: flex;
-    flex-direction: column;
-    margin-left: 100px;
-    align-items: center;
+.list-view {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  align-items: center;
 }
-.settings-toggles{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 40px;
-    width: 400px;
-    padding: 50px;
-    background-color: #27AAF9;
-    border-radius: 10px;
-    box-shadow:  20px 20px 60px #bebebe,
-             -20px -20px 60px #ffffff;
+.settings-toggles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  width: 400px;
+  padding: 50px;
+  background-color: #27aaf9;
+  border-radius: 10px;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 }
-.settings-heading{
-    color: #000000;
-    text-transform: uppercase;
+.settings-heading {
+  color: #000000;
+  text-transform: uppercase;
 }
-.settings-toggles label{
-    color: rgba(255, 255, 255, 0.93);
+.settings-toggles label {
+  color: rgba(255, 255, 255, 0.93);
 }

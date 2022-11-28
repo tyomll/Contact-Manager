@@ -7,9 +7,21 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import NoContacts from "./NoContacts/NoContacts";
 import Pagination from "./Pagination/Pagination";
 import ContactList from "./ContactList/ContactList";
+import ContactPageEdit from "../ContactPage/ContactPageEdit/ContactPageEdit";
 
-const Home = ({ editMode, addMode, viewMode, BASE_URL }) => {
-  const [contactList, setContactList] = useState([]);
+const Home = ({ editMode,
+  addMode,
+  viewMode,
+  BASE_URL,
+  onChange,
+  contactList,
+  setContactList,
+  contacts,
+  updateContacts,
+  loading,
+  fetchUsers,
+  error,
+  setError }) => {
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
   const [mode, setMode] = useState(false);
@@ -19,28 +31,11 @@ const Home = ({ editMode, addMode, viewMode, BASE_URL }) => {
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
   const [sortBy, setSortBy] = useState(null);
-  const [filterAlphabetically, setFilterAlphabetically] = useState(false);
-  const [contacts, updateContacts] = useState(contactList);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [onePageUserCount, setOnePageUserCount] = useState(8)
   const lastContactIndex = currentPage * onePageUserCount;
   const firstContactIndex = lastContactIndex - onePageUserCount;
   const currentPosts = contacts.slice(firstContactIndex, lastContactIndex);
-  async function fetchUsers() {
-    try {
-      setLoading(true);
-      setError("");
-      const response = await BASE_URL.get("/users");
-      setLoading(false);
-      const users = response.data;
-      setContactList(users);
-      updateContacts(users);
-    } catch (e) {
-      setError(e.message);
-    }
-  }
 
   function onCheckAll() {
     setSelectAll(!selectAll);
@@ -82,30 +77,6 @@ const Home = ({ editMode, addMode, viewMode, BASE_URL }) => {
         }
       });
     }
-  }
-  async function onChange(newInfo) {
-    setLoading(true);
-    await BASE_URL.put(
-      `/users/${newInfo.id}`,
-      newInfo
-    );
-    setLoading(false);
-    setContactList(
-      contactList.map((item) => {
-        if (item.id === newInfo.id) {
-          return newInfo;
-        }
-        return item;
-      })
-    );
-    updateContacts(
-      contactList.map((item) => {
-        if (item.id === newInfo.id) {
-          return newInfo;
-        }
-        return item;
-      })
-    );
   }
   async function onDelete(id) {
     try {
@@ -150,9 +121,7 @@ const Home = ({ editMode, addMode, viewMode, BASE_URL }) => {
     setEditItem(item);
   }
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+
 
 
   return (
@@ -192,8 +161,6 @@ const Home = ({ editMode, addMode, viewMode, BASE_URL }) => {
         checkedItems={checkedItems}
         contactList={contactList}
         viewMode={viewMode}
-        filterAlphabetically={filterAlphabetically}
-        setFilterAlphabetically={setFilterAlphabetically}
         setSortBy={setSortBy}
         sortBy={sortBy}
       />

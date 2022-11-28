@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Link, Route } from "react-router-dom";
 const ListItemNormalMode = ({
   item,
   reff,
   checkedItems,
   editMode,
-  setMode,
   onCheck,
   toggleMode,
   openDeletePopup,
@@ -51,20 +51,20 @@ const ListItemNormalMode = ({
       </div>
       <div className="profession">{item.profession}</div>
       <div className="edit-btns">
-        <span className="edit">
-          <FontAwesomeIcon
-            icon={faPen}
-            onClick={() => {
-              if (editMode === "modal") {
-                setMode(true);
+        {editMode === "modal" ? (
+          <span className="edit">
+            <FontAwesomeIcon
+              icon={faPen}
+              onClick={() => {
                 toggleMode(item.id);
-              }
-              if (editMode === "inline") {
-                setMode(false);
-              }
-            }}
-          />
-        </span>
+              }}
+            />
+          </span>
+        ) : (
+          <Link to={`contacts/${item.id}`}>
+            <FontAwesomeIcon icon={faPen} />
+          </Link>
+        )}
 
         <span className="delete" onClick={openDeletePopup}>
           <FontAwesomeIcon icon={faTrash} />

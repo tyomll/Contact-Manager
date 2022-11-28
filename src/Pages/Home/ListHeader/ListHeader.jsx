@@ -6,8 +6,6 @@ const ListHeader = ({
   checkedItems,
   contactList,
   viewMode,
-  filterAlphabetically,
-  setFilterAlphabetically,
   setSortBy,
   sortBy,
 }) => {
@@ -114,19 +112,6 @@ const ListHeader = ({
               <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
             </span>
           </p>
-        </div>
-        <div className="filter">
-          <span
-            style={{
-              color: filterAlphabetically ? "rgb(39 170 249)" : "#678796",
-            }}
-            className="filter-alphabetically"
-            onClick={() => {
-              setFilterAlphabetically(!filterAlphabetically);
-            }}
-          >
-            <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
-          </span>
         </div>
       </div>
     </>

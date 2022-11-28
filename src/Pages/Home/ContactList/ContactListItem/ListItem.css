@@ -118,7 +118,10 @@
   height: 30px;
   font-size: 14px;
 }
-
+a{
+  text-decoration: none; 
+ color: black; 
+}
 @media (max-width: 1268px) {
   .avatar-img {
     width: 40px;

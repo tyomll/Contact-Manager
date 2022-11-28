@@ -33,14 +33,6 @@ const InlinePhoneAdd = ({
       );
     }
   }
-  function addNumber(e) {
-    setAddedPhone([
-      ...addedPhone,
-      {
-        number: "",
-      },
-    ]);
-  }
   function deleteNumber() {
     setAddedPhone(
       addedPhone.filter((phoneNumber , i) => {
