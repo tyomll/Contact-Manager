@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX , faAdd } from "@fortawesome/free-solid-svg-icons";
+import { faX, faAdd } from "@fortawesome/free-solid-svg-icons";
 const ListItemPhoneChange = ({
   num,
   index,
@@ -13,7 +13,7 @@ const ListItemPhoneChange = ({
 
   function changeNumber(e) {
     setEditedPhone(
-      editedPhone.map((phoneNumber , i) => {
+      editedPhone.map((phoneNumber, i) => {
         if (i === index) {
           return {
             ...phoneNumber,
@@ -26,16 +26,15 @@ const ListItemPhoneChange = ({
   }
   function addNumber(e) {
     setEditedPhone([
-     ...editedPhone,
-     {
-      number: "",
-     }
-    ]
-    );
+      ...editedPhone,
+      {
+        number: "",
+      },
+    ]);
   }
   function deleteNumber() {
     setEditedPhone(
-      editedPhone.filter((phoneNumber , i) => {
+      editedPhone.filter((phoneNumber, i) => {
         return i !== index;
       })
     );
@@ -49,21 +48,20 @@ const ListItemPhoneChange = ({
   useEffect(() => {
     setEditedContact({ ...editedContact, phone: editedPhone });
   }, [editedPhone]);
-  
+
   return (
     <ul>
       <li>
         {editedContact.phone.length > 1 && (
-          <button onClick={deleteNumber} style={{marginRight: "5px"}}>
+          <button onClick={deleteNumber} style={{ marginRight: "5px" }}>
             <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
           </button>
         )}
         {editedContact.phone.length < 3 && (
           <button onClick={(event) => addNumber(event)}>
-          <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
-        </button>
+            <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+          </button>
         )}
-
 
         <input
           type="text"

@@ -1,17 +1,16 @@
 import React from "react";
-import "./Sidebar.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faGear,
   faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
-  const [clicked , setClicked] = useState(false)
   const Menus = [
     { title: "Home", icon: faHome, link: "/" },
     { title: "Settings", icon: faGear, link: "/settings" },

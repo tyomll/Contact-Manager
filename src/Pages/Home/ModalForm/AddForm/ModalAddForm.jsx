@@ -110,16 +110,13 @@ const ModalAddForm = ({
           <button
             onClick={() => {
               if (
-                Object.keys(newContact).every(
-                  (k) => newContact[k] !== ""
-                ) &&
+                Object.keys(newContact).every((k) => newContact[k] !== "") &&
                 Object.keys(addedPhone).every((k) => addedPhone[k].number)
               ) {
                 setModalMode(false);
                 setMode(false);
                 onAdd(newContact);
-              }
-              else {
+              } else {
                 swal("Oops Error", "You should fill all fields!", "error");
               }
             }}

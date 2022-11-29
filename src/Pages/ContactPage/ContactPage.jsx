@@ -21,10 +21,10 @@ const ContactPage = ({ BASE_URL, onChange, contactList }) => {
 
   const normalMode = (
     <div className="contact-page">
-      <Link to = "/">
-      <div className="contact-page-back">
-      <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
-      </div>
+      <Link to="/">
+        <div className="contact-page-back">
+          <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
+        </div>
       </Link>
       {contact && (
         <div className="contact-page-container">

@@ -22,31 +22,6 @@ function Settings({
     <div className="settings-page-container">
       <div className="settings-toggles">
         <div>
-          <h3 className="settings-heading">Edit Contact Type</h3>
-        </div>
-        <div className="edit-type">
-          <div className="page-edit">
-            <label>On Page</label>
-            <input
-              name="page-edit"
-              type="radio"
-              value="page"
-              checked={editMode === "page"}
-              onChange={handleEditChange}
-            />
-          </div>
-          <div className="modal-edit">
-            <label>Modal Edit</label>
-            <input
-              name="modal-edit"
-              type="radio"
-              value="modal"
-              checked={editMode === "modal"}
-              onChange={handleEditChange}
-            />
-          </div>
-        </div>
-        <div>
           <h3 className="settings-heading">Add Contact Type</h3>
         </div>
         <div className="add-type">

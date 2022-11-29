@@ -9,10 +9,9 @@ import Navigation from "../Navigation/Navigation";
 import ContactEditPage from "../Pages/ContactPage/ContactPage";
 
 function App() {
-  const editModeFromLocalStorage = localStorage.getItem('editMode') || 'modal'
-  const addModeFromLocalStorage = localStorage.getItem('addMode') || 'modal'
-  const viewModeFromLocalStorage = localStorage.getItem('viewMode') || 'list'
-  const [editMode, setEditMode] = useState(editModeFromLocalStorage);
+  const addModeFromLocalStorage = localStorage.getItem("addMode") || "modal";
+  const viewModeFromLocalStorage = localStorage.getItem("viewMode") || "list";
+
   const [addMode, setAddMode] = useState(addModeFromLocalStorage);
   const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
   const [contactList, setContactList] = useState([]);
@@ -39,10 +38,7 @@ function App() {
   }
   async function onChange(newInfo) {
     setLoading(true);
-    await BASE_URL.put(
-      `/users/${newInfo.id}`,
-      newInfo
-    );
+    await BASE_URL.put(`/users/${newInfo.id}`, newInfo);
     setLoading(false);
     setContactList(
       contactList.map((item) => {
@@ -64,57 +60,66 @@ function App() {
   useEffect(() => {
     fetchUsers();
   }, []);
-  useEffect(() => {
-    localStorage.setItem("editMode", editMode)
-  }, [editMode])
 
   useEffect(() => {
-    localStorage.setItem("addMode", addMode)
-  }, [addMode])
+    localStorage.setItem("addMode", addMode);
+  }, [addMode]);
 
   useEffect(() => {
-    localStorage.setItem("viewMode", viewMode)
-  }, [viewMode])
-
+    localStorage.setItem("viewMode", viewMode);
+  }, [viewMode]);
 
   return (
     <div className="flex">
       <Navigation />
       <div className="h-screen flex-1 p-5">
         <Routes>
-          <Route path="/" element={
-            <Home
-              editMode={editMode}
-              addMode={addMode}
-              viewMode={viewMode}
-              BASE_URL={BASE_URL}
-              contactList={contactList}
-              contacts={contacts}
-              loading={loading}
-              setContactList={setContactList}
-              updateContacts={updateContacts}
-              setLoading={setLoading}
-              error={error}
-              setError={setError}
-              fetchUsers={fetchUsers}
-              onChange={onChange}
-            />
-          } />
-          <Route path="/settings" element={<Settings
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            setEditMode={setEditMode}
-            editMode={editMode}
-            setAddMode={setAddMode}
-            addMode={addMode}
-          />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                addMode={addMode}
+                viewMode={viewMode}
+                BASE_URL={BASE_URL}
+                contactList={contactList}
+                contacts={contacts}
+                loading={loading}
+                setContactList={setContactList}
+                updateContacts={updateContacts}
+                setLoading={setLoading}
+                error={error}
+                setError={setError}
+                fetchUsers={fetchUsers}
+                onChange={onChange}
+              />
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <Settings
+                viewMode={viewMode}
+                setViewMode={setViewMode}
+                setAddMode={setAddMode}
+                addMode={addMode}
+              />
+            }
+          />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/contacts/:id" element={<ContactEditPage BASE_URL={BASE_URL} onChange={onChange} contactList={contactList}/>} />
+          <Route
+            path="/contacts/:id"
+            element={
+              <ContactEditPage
+                BASE_URL={BASE_URL}
+                onChange={onChange}
+                contactList={contactList}
+              />
+            }
+          />
         </Routes>
       </div>
     </div>
   );
 }
-
 
 export default App;

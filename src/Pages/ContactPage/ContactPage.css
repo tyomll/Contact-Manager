@@ -1,59 +1,63 @@
-.contact-page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
+.contact-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 5px 8px rgba(230, 230, 230, 0.38);
+  -moz-box-shadow: 0px 0px 5px 8px rgba(230, 230, 230, 0.38);
+  box-shadow: 0px 0px 5px 8px rgba(230, 230, 230, 0.38);
 }
-.contact-page-container{
-    display: flex;
-    height: 400px;
-    gap: 50px;
+.contact-page-container {
+  display: flex;
+  height: 400px;
+  gap: 50px;
 }
-.contact-page-avatar img{
-    width: 400px;
-    height: 400px;
-    border-radius: 15px;
+.contact-page-avatar img {
+  width: 400px;
+  height: 400px;
+  border-radius: 15px;
 }
 
-.contact-page-contact-details label{
-    font-size: 23px;
+.contact-page-contact-details label {
+  font-size: 23px;
 }
-.contact-page-contact-details p{
-    font-size: 17px;
-    color: rgb(126,126,126);
-    font-weight: normal;
+.contact-page-contact-details p {
+  font-size: 17px;
+  color: rgb(126, 126, 126);
+  font-weight: normal;
 }
-.contact-page-edit-button button{
-    height: 60px;
-    width: 200px;
-    margin-top: 10px;
-    background-color: inherit;
-    border-radius: 15px;
-    border: 1px solid rgb(8,26,81);
-    color: rgb(8,26,81);
-    transition: 0.5s;
-    font-size: 17px;
+.contact-page-edit-button button {
+  height: 60px;
+  width: 200px;
+  margin-top: 10px;
+  background-color: inherit;
+  border-radius: 15px;
+  border: 1px solid rgb(8, 26, 81);
+  color: rgb(8, 26, 81);
+  transition: 0.5s;
+  font-size: 17px;
 }
-.contact-page-edit-button svg{
-    margin-right: 20px;
+.contact-page-edit-button svg {
+  margin-right: 20px;
 }
-.contact-page-edit-button button:hover{
-    background-color:rgb(8,26,81) ;
-    color: white;
-    border: none;
+.contact-page-edit-button button:hover {
+  background-color: rgb(8, 26, 81);
+  color: white;
+  border: none;
 }
-.contact-page-back{
-    position: absolute;
-    top: 50px;
-    left: 150px;
-    background-color: rgb(41, 58, 114);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
+.contact-page-back {
+  position: absolute;
+  top: 50px;
+  left: 150px;
+  background-color: rgb(41, 58, 114);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
 }

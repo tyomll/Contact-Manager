@@ -1,19 +1,19 @@
-.no-contacts{
-    height: 50vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.no-contacts {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.no-contacts-heading{
-    color: #756CC0;
-    font-size: 50px;
-    font-weight: 700;
-    color: rgb(81, 82, 83);
+.no-contacts-heading {
+  color: #756cc0;
+  font-size: 50px;
+  font-weight: 700;
+  color: rgb(81, 82, 83);
 }
-.no-contacts span span{
-    cursor: pointer;
-    font-weight: 500;
-    color: rgb(81, 82, 83);
+.no-contacts span span {
+  cursor: pointer;
+  font-weight: 500;
+  color: rgb(81, 82, 83);
 }

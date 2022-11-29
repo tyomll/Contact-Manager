@@ -81,7 +81,7 @@
   }
 }
 
-@media (max-width : 465px) {
+@media (max-width: 465px) {
   .header-name {
     width: 70%;
   }

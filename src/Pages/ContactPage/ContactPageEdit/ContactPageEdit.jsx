@@ -30,22 +30,36 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
         <div className="contact-edit-page-contact-details">
           <div className="contact-edit-page-name">
             <label>Name:</label>
-            <input value={editedContact.firstName} onChange={(e) => {
-                setEditedContact({...editedContact , firstName : e.target.value})
-            }} />
+            <input
+              value={editedContact.firstName}
+              onChange={(e) => {
+                setEditedContact({
+                  ...editedContact,
+                  firstName: e.target.value,
+                });
+              }}
+            />
           </div>
           <div className="contact-edit-page-surname">
             <label>Surname:</label>
-            <input value={editedContact.lastName} onChange={(e) => {
-                setEditedContact({...editedContact , lastName : e.target.value})
-            }}/>
+            <input
+              value={editedContact.lastName}
+              onChange={(e) => {
+                setEditedContact({
+                  ...editedContact,
+                  lastName: e.target.value,
+                });
+              }}
+            />
           </div>
           <div className="contact-edit-page-email">
             <label>Email:</label>
-            <input value={editedContact.email} 
-            onChange={(e) => {
-                setEditedContact({...editedContact , email : e.target.value})
-            }}/>
+            <input
+              value={editedContact.email}
+              onChange={(e) => {
+                setEditedContact({ ...editedContact, email: e.target.value });
+              }}
+            />
           </div>
           <div className="contact-edit-page-phone">
             <div>
@@ -69,9 +83,15 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
           </div>
           <div className="contact-edit-page-profession">
             <label>Profession:</label>
-            <input value={editedContact.profession} onChange={(e) => {
-                setEditedContact({...editedContact , profession : e.target.value})
-            }}/>
+            <input
+              value={editedContact.profession}
+              onChange={(e) => {
+                setEditedContact({
+                  ...editedContact,
+                  profession: e.target.value,
+                });
+              }}
+            />
           </div>
           <div className="contact-edit-page-save-button">
             <button

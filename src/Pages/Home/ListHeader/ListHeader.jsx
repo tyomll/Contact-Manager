@@ -52,7 +52,6 @@ const ListHeader = ({
         <div className="list-header-breaker"></div>
         <div className="header-name">
           <p>
-            name
             <span
               style={{
                 color: sortBy === "firstName" ? "rgb(39 170 249)" : "#678796",
@@ -68,11 +67,11 @@ const ListHeader = ({
             >
               <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
             </span>
+            name
           </p>
         </div>
         <div className="header-email">
           <p>
-            email
             <span
               style={{
                 color: sortBy === "lastName" ? "rgb(39 170 249)" : "#678796",
@@ -88,6 +87,7 @@ const ListHeader = ({
             >
               <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
             </span>
+            email
           </p>
         </div>
         <div className="header-phone">
@@ -95,7 +95,6 @@ const ListHeader = ({
         </div>
         <div className="header-profession">
           <p>
-            profession
             <span
               style={{
                 color: sortBy === "profession" ? "rgb(39 170 249)" : "#678796",
@@ -111,6 +110,7 @@ const ListHeader = ({
             >
               <FontAwesomeIcon icon={faArrowDownAZ}></FontAwesomeIcon>
             </span>
+            profession
           </p>
         </div>
       </div>

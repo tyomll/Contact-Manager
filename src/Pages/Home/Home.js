@@ -1,5 +1,5 @@
 import "./Home.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListHeader from "./ListHeader/ListHeader";
 import ModalForm from "./ModalForm/ModalForm";
 import Header from "./Header/Header";
@@ -7,9 +7,9 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import NoContacts from "./NoContacts/NoContacts";
 import Pagination from "./Pagination/Pagination";
 import ContactList from "./ContactList/ContactList";
-import ContactPageEdit from "../ContactPage/ContactPageEdit/ContactPageEdit";
 
-const Home = ({ editMode,
+const Home = ({
+  editMode,
   addMode,
   viewMode,
   BASE_URL,
@@ -21,7 +21,8 @@ const Home = ({ editMode,
   loading,
   fetchUsers,
   error,
-  setError }) => {
+  setError,
+}) => {
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
   const [mode, setMode] = useState(false);
@@ -32,7 +33,7 @@ const Home = ({ editMode,
   const [searchBy, setSearchBy] = useState("firstName");
   const [sortBy, setSortBy] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [onePageUserCount, setOnePageUserCount] = useState(8)
+  const [onePageUserCount, setOnePageUserCount] = useState(8);
   const lastContactIndex = currentPage * onePageUserCount;
   const firstContactIndex = lastContactIndex - onePageUserCount;
   const currentPosts = contacts.slice(firstContactIndex, lastContactIndex);
@@ -51,10 +52,7 @@ const Home = ({ editMode,
   }
   async function onAdd(contact) {
     try {
-      const response = await BASE_URL.post(
-        "/users",
-        contact
-      );
+      const response = await BASE_URL.post("/users", contact);
       setContactList([...contactList, response.data]);
       updateContacts([...contactList, response.data]);
       fetchUsers();
@@ -80,9 +78,7 @@ const Home = ({ editMode,
   }
   async function onDelete(id) {
     try {
-      BASE_URL.delete(
-        `/users/${id}`
-      );
+      BASE_URL.delete(`/users/${id}`);
       setContactList(
         contactList.filter((contact) => {
           return contact.id !== id;
@@ -103,9 +99,7 @@ const Home = ({ editMode,
       .filter((contact) => checkedItems.includes(contact.id))
       .map((contact) => contact.id);
     selectedItems.map((id) => {
-      BASE_URL.delete(
-        `/users/${id}`
-      );
+      BASE_URL.delete(`/users/${id}`);
     });
     updateContacts(
       contacts.filter((contact) => !checkedItems.includes(contact.id)),
@@ -120,9 +114,6 @@ const Home = ({ editMode,
     setModalMode(true);
     setEditItem(item);
   }
-
-
-
 
   return (
     <div className="container-home">

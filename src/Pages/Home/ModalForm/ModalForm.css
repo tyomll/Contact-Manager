@@ -12,7 +12,7 @@
   z-index: 1000;
 }
 .edit-modal {
-  display: flex;    
+  display: flex;
   width: 400px;
   height: 600px;
   background-color: #ffffff;

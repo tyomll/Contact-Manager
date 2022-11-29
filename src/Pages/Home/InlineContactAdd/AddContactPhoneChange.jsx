@@ -12,14 +12,13 @@ const InlinePhoneAdd = ({
   const [value, setValue] = useState("");
   function handleNumberChange(e) {
     if (addedPhone.length === 0) {
-      setAddedPhone(
-        [...addedPhone,
+      setAddedPhone([
+        ...addedPhone,
         {
-        
-        number: e.target.value,
-      }]);
-    }
-    else{
+          number: e.target.value,
+        },
+      ]);
+    } else {
       setAddedPhone(
         addedPhone.map((phoneNumber, i) => {
           if (i === index) {
@@ -35,7 +34,7 @@ const InlinePhoneAdd = ({
   }
   function deleteNumber() {
     setAddedPhone(
-      addedPhone.filter((phoneNumber , i) => {
+      addedPhone.filter((phoneNumber, i) => {
         return i !== index;
       })
     );
@@ -46,27 +45,26 @@ const InlinePhoneAdd = ({
 
   return (
     <div>
-      
-          {newContact.phone.length > 1 && (
-            <button onClick={() => deleteNumber()} style={{marginRight: "5px"}}>
-              <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
-            </button>
-          )}
-          {newContact.phone.length < 3 && (
-            <button onClick={(event) => addNumber(event)}>
-              <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
-            </button>
-          )}
+      {newContact.phone.length > 1 && (
+        <button onClick={() => deleteNumber()} style={{ marginRight: "5px" }}>
+          <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+        </button>
+      )}
+      {newContact.phone.length < 3 && (
+        <button onClick={(event) => addNumber(event)}>
+          <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+        </button>
+      )}
 
-          <input
-            type="text"
-            value={value}
-            placeholder={`Phone ${index ? index + 1 : 1}`}
-            onChange={(event) => {
-              setValue(event.target.value);
-              handleNumberChange(event);
-            }}
-          />
+      <input
+        type="text"
+        value={value}
+        placeholder={`Phone ${index ? index + 1 : 1}`}
+        onChange={(event) => {
+          setValue(event.target.value);
+          handleNumberChange(event);
+        }}
+      />
     </div>
   );
 };

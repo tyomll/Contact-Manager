@@ -20,7 +20,6 @@ const ContactList = ({
   onDelete,
   currentPosts,
 }) => {
-
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(contacts);

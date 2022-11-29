@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import {
   faHome,
   faGear,
   faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import NavLinks from "./NavLinks/NavLinks";
+import "./Navigation.css"
 const Navigation = () => {
   const [open, setOpen] = useState(false);
+  const [clickedLink, setClickedLink] = useState("Home");
   const Menus = [
     { title: "Home", icon: faHome, link: "/" },
     { title: "Settings", icon: faGear, link: "/settings" },
     { title: "About Us", icon: faPeopleGroup, link: "/about", gap: true },
   ];
+
   return (
     <div
       className={` ${
@@ -45,7 +47,13 @@ const Navigation = () => {
       </div>
       <ul className="pt-6">
         {Menus.map((Menu, index) => (
-          <NavLinks menu={Menu} open={open} key={index}/>
+          <NavLinks
+            menu={Menu}
+            open={open}
+            key={index}
+            clickedLink={clickedLink}
+            setClickedLink={setClickedLink}
+          />
         ))}
       </ul>
     </div>

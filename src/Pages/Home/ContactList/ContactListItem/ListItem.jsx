@@ -1,8 +1,6 @@
 import "./ListItem.css";
-import { useState } from "react";
 import swal from "sweetalert";
 import ListItemNormalMode from "./ListItemNormalMode";
-
 
 const ListItem = ({
   item,
@@ -13,7 +11,6 @@ const ListItem = ({
   onCheck,
   onDelete,
 }) => {
-  
   function openDeletePopup() {
     swal({
       title: "Are you sure?",
@@ -42,8 +39,7 @@ const ListItem = ({
       toggleMode={toggleMode}
       openDeletePopup={openDeletePopup}
     />
-  ) 
-  
+  );
 };
 
 export default ListItem;

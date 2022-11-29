@@ -99,17 +99,17 @@
   /* .header-tools {
     flex-direction: column;
   } */
-  .add-contact-btn{
+  .add-contact-btn {
     width: 50px;
   }
-  .add-contact-btn span{
+  .add-contact-btn span {
     display: none;
     width: 100px;
   }
   .delete-contact-btn {
     width: 50px;
   }
-  .delete-contact-btn span{
+  .delete-contact-btn span {
     display: none;
   }
   .search-input input {
@@ -124,8 +124,8 @@
     font-size: 11px;
   }
 }
-@media (max-width : 690px){
-    .search-contact-btn {
-       display: none;
-      }
+@media (max-width: 690px) {
+  .search-contact-btn {
+    display: none;
+  }
 }
