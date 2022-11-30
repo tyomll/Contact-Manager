@@ -85,3 +85,47 @@
   color: white;
   border: none;
 }
+
+@media (max-width: 1025px) {
+  .contact-edit-page-avatar img {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+  }
+  .contact-edit-page-container {
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+  }
+  .contact-edit-page {
+    height: fit-content;
+  }
+  .contact-edit-page-contact-details input {
+    width: 180px;
+  }
+  .contact-edit-page-save-button button {
+    height: 60px;
+    width: 140px;
+    left: 40px;
+  }
+  .contact-edit-page-cancel-button button {
+    height: 60px;
+    width: 140px;
+  }
+  .contact-edit-page-cancel-button {
+    margin-right: 50px;
+  }
+}
+@media (max-width: 479px) {
+  .contact-edit-page-contact-details label {
+    left: 40px;
+  }
+  .contact-edit-page-contact-details input {
+    width: 140px;
+  }
+  .contact-edit-page-contact-details input {
+    margin-right: 40px;
+  }
+}

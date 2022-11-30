@@ -4,18 +4,18 @@ import "./Pagination.css";
 
 const Pagination = ({
   contactList,
-  pageIndex,
   onePageUserCount,
   setOnePageUserCount,
   setCurrentPage,
   currentPosts,
   firstContactIndex,
   lastContactIndex,
+  currentPage,
 }) => {
   return (
     <div className="pag">
       <div className="pagination">
-        <div className="flex items-center justify-between border-gray-200 px-4 py-3 sm:px-6">
+        <div className="flex items-center justify-between border-gray-200 px-4 py-3 sm:px-6 ">
           <div>
             <p className="text-sm text-gray-700">
               Showing{" "}
@@ -39,9 +39,12 @@ const Pagination = ({
             >
               <a
                 href="#"
+                style={{ display: currentPage === 1 ? "none" : "inline-flex" }}
                 className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
                 onClick={() => {
-                  setCurrentPage(pageIndex - 1);
+                  if (currentPage !== 1) {
+                    setCurrentPage(currentPage - 1);
+                  }
                 }}
               >
                 <span className="sr-only">Previous</span>
@@ -58,7 +61,7 @@ const Pagination = ({
                       href="#"
                       aria-current="page"
                       className={`relative z-10 inline-flex items-center border border-gray-200 text-gray-500 hover:bg-gray-50 bg-white px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20 ${
-                        pageIndex === i + 1
+                        currentPage === i + 1
                           ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600"
                           : ""
                       }`}
@@ -71,19 +74,22 @@ const Pagination = ({
                   );
                 }
               })}
-              <div className="contacts-count-per-page">
-                <span>Contacts Per Page</span>
-                <input
-                  type="number"
-                  value={onePageUserCount}
-                  onChange={(e) => {
-                    setOnePageUserCount(e.target.value);
-                  }}
-                />
-              </div>
             </nav>
           </div>
         </div>
+      </div>
+      <div className="contacts-count-per-page">
+        <span>Contacts Per Page</span>
+        <input
+          type="number"
+          value={onePageUserCount}
+          onChange={(e) => {
+            console.log(e.target.value);
+            if (e.target.value.trim().length !== 0 && e.target.value !== "0") {
+              setOnePageUserCount(e.target.value);
+            }
+          }}
+        />
       </div>
     </div>
   );

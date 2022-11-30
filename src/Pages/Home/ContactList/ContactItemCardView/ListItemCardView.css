@@ -94,3 +94,8 @@
         width: 45%;
     }
 }
+@media (max-width: 440px) {
+    .card{
+        width: 100%;
+    }
+}

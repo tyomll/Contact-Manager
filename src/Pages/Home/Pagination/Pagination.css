@@ -1,5 +1,7 @@
 .pag{
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -7,7 +9,9 @@
   display: flex;
   justify-content: center;
   font-size: 10px;
+  
 }
+
 .contacts-count-per-page {
   position: absolute;
   right: 20px;
@@ -26,16 +30,25 @@
   outline: none;
   font-size: 14px;
 }
+#root > div > div.h-screen.flex-1.p-5 > div > div.pag > div.pagination > div > div:nth-child(2) > nav{
+  gap: 2px;
+}
+.contacts-count-per-page {
+  font-size: 14px;
+  position: inherit;
+  display: block;
+  margin-right: 20px;
+}
+.pagination nav {
+  margin-top: 10px;
+  
+}
 @media (max-width: 910px) {
-  .pagination {
-    display: flex;
-    justify-content: flex-start;
-    width: fit-content;
-  }
-  .contacts-count-per-page {
-    font-size: 14px;
-  }
   .contacts-count-per-page input {
     width: 35px;
+  }
+  #root > div > div.h-screen.flex-1.p-5 > div > div.pag > div.pagination > div > div:nth-child(2){
+    display: flex;
+    justify-content: center;
   }
 }

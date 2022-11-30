@@ -31,6 +31,7 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
           <div className="contact-edit-page-name">
             <label>Name:</label>
             <input
+              placeholder="First Name"
               value={editedContact.firstName}
               onChange={(e) => {
                 setEditedContact({
@@ -43,6 +44,7 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
           <div className="contact-edit-page-surname">
             <label>Surname:</label>
             <input
+              placeholder="Last Name"
               value={editedContact.lastName}
               onChange={(e) => {
                 setEditedContact({
@@ -55,6 +57,7 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
           <div className="contact-edit-page-email">
             <label>Email:</label>
             <input
+              placeholder="Email"
               value={editedContact.email}
               onChange={(e) => {
                 setEditedContact({ ...editedContact, email: e.target.value });
@@ -84,6 +87,7 @@ const ContactPageEdit = ({ contact, setEditMode, onChange }) => {
           <div className="contact-edit-page-profession">
             <label>Profession:</label>
             <input
+              placeholder="Profession"
               value={editedContact.profession}
               onChange={(e) => {
                 setEditedContact({

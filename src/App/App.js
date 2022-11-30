@@ -9,10 +9,7 @@ import Navigation from "../Navigation/Navigation";
 import ContactEditPage from "../Pages/ContactPage/ContactPage";
 
 function App() {
-  const addModeFromLocalStorage = localStorage.getItem("addMode") || "modal";
   const viewModeFromLocalStorage = localStorage.getItem("viewMode") || "list";
-
-  const [addMode, setAddMode] = useState(addModeFromLocalStorage);
   const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
   const [contactList, setContactList] = useState([]);
   const [contacts, updateContacts] = useState(contactList);
@@ -61,9 +58,6 @@ function App() {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("addMode", addMode);
-  }, [addMode]);
 
   useEffect(() => {
     localStorage.setItem("viewMode", viewMode);
@@ -78,7 +72,6 @@ function App() {
             path="/"
             element={
               <Home
-                addMode={addMode}
                 viewMode={viewMode}
                 BASE_URL={BASE_URL}
                 contactList={contactList}
@@ -100,8 +93,6 @@ function App() {
               <Settings
                 viewMode={viewMode}
                 setViewMode={setViewMode}
-                setAddMode={setAddMode}
-                addMode={addMode}
               />
             }
           />

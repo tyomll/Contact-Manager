@@ -3,9 +3,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 .about-us-heading {
   font-size: 50px;
   font-weight: 700;
   color: rgb(81, 82, 83);
+  
+}
+.profile-link{
+  color: rgb(9, 43, 146);
+  transition: 0.3s;
+}
+.profile-link:hover{
+  color: rgb(24, 60, 167);
+}
+.about-us-list{
+  margin-top: 10px;
+  color: rgb(83, 79, 196);
+  text-align: left;
+  list-style-type: circle;
 }

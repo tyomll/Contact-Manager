@@ -1,19 +1,9 @@
 import "./Settings.css";
 
 function Settings({
-  setEditMode,
-  editMode,
-  setAddMode,
-  addMode,
   setViewMode,
   viewMode,
 }) {
-  const handleEditChange = (e) => {
-    setEditMode(e.target.value);
-  };
-  const handleAddChange = (e) => {
-    setAddMode(e.target.value);
-  };
   const handleViewModeChange = (e) => {
     setViewMode(e.target.value);
   };
@@ -21,31 +11,6 @@ function Settings({
   return (
     <div className="settings-page-container">
       <div className="settings-toggles">
-        <div>
-          <h3 className="settings-heading">Add Contact Type</h3>
-        </div>
-        <div className="add-type">
-          <div className="inline-add">
-            <label>Inline Add</label>
-            <input
-              name="inline-add"
-              type="radio"
-              value="inline"
-              checked={addMode === "inline"}
-              onChange={handleAddChange}
-            />
-          </div>
-          <div className="modal-add">
-            <label>Modal Add</label>
-            <input
-              name="modal-add"
-              type="radio"
-              value="modal"
-              checked={addMode === "modal"}
-              onChange={handleAddChange}
-            />
-          </div>
-        </div>
         <div>
           <h3 className="settings-heading">Contact View Type</h3>
         </div>
