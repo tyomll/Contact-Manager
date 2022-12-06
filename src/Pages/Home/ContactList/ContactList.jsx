@@ -2,8 +2,8 @@ import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import ListItemCardView from "./ContactItemCardView/ListItemCardView";
 import ListItem from "./ContactListItem/ListItem";
+import { useSettings } from "../../../context/context";
 const ContactList = ({
-  viewMode,
   contacts,
   updateContacts,
   searchBy,
@@ -20,6 +20,7 @@ const ContactList = ({
   onDelete,
   currentPosts,
 }) => {
+  const settings = useSettings()
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(contacts);
@@ -30,7 +31,7 @@ const ContactList = ({
 
   return (
     <>
-      {viewMode === "list" && (
+      {settings.viewMode && (
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="list">
             {(provided) => (
@@ -100,7 +101,7 @@ const ContactList = ({
           </Droppable>
         </DragDropContext>
       )}
-      {viewMode === "card" && (
+      {!settings.viewMode && (
         <div className="card-items">
           {currentPosts
             .filter((contact) => {

@@ -1,9 +1,18 @@
 import "./Settings.css";
+import { useSettings, useSettingsDispatch } from "../../context/context";
+import { setCardView, setListView } from "../../context/actions/actions";
 
-function Settings({
-  setViewMode,
-  viewMode,
-}) {
+function Settings({ setViewMode, viewMode }) {
+  const settings = useSettings();
+  const dispatch = useSettingsDispatch();
+
+  const handleListViewModeChange = () => {
+    dispatch(setListView());
+  };
+
+  const handleCardViewModeChange = () => {
+    dispatch(setCardView());
+  };
   const handleViewModeChange = (e) => {
     setViewMode(e.target.value);
   };
@@ -20,9 +29,8 @@ function Settings({
             <input
               name="card-view"
               type="radio"
-              value="card"
-              checked={viewMode === "card"}
-              onChange={handleViewModeChange}
+              checked={!settings.viewMode || ""}
+              onChange={handleCardViewModeChange}
             />
           </div>
           <div className="list-view">
@@ -30,9 +38,8 @@ function Settings({
             <input
               name="list-view"
               type="radio"
-              value="list"
-              checked={viewMode === "list"}
-              onChange={handleViewModeChange}
+              checked={settings.viewMode || ""}
+              onChange={handleListViewModeChange}
             />
           </div>
         </div>

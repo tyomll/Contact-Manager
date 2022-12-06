@@ -7,14 +7,18 @@ import Settings from "../Pages/Settings/Settings";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Navigation from "../Navigation/Navigation";
 import ContactEditPage from "../Pages/ContactPage/ContactPage";
-
+import { useSettings } from "../context/context";
 function App() {
-  const viewModeFromLocalStorage = localStorage.getItem("viewMode") || "list";
-  const [viewMode, setViewMode] = useState(viewModeFromLocalStorage);
+
+  const checkedContactsFromLocalStorage =
+    localStorage.getItem("checkedContacts") || "[]";
   const [contactList, setContactList] = useState([]);
   const [contacts, updateContacts] = useState(contactList);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [checkedItems, setCheckedItems] = useState(
+    checkedContactsFromLocalStorage
+  );
 
   const BASE_URL = axios.create({
     baseURL: "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/",
@@ -60,56 +64,53 @@ function App() {
 
 
   useEffect(() => {
-    localStorage.setItem("viewMode", viewMode);
-  }, [viewMode]);
-
+    localStorage.setItem("checkedContacts", checkedItems);
+  }, [checkedItems]);
   return (
-    <div className="flex">
-      <Navigation />
-      <div className="h-screen flex-1 p-5">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                viewMode={viewMode}
-                BASE_URL={BASE_URL}
-                contactList={contactList}
-                contacts={contacts}
-                loading={loading}
-                setContactList={setContactList}
-                updateContacts={updateContacts}
-                setLoading={setLoading}
-                error={error}
-                setError={setError}
-                fetchUsers={fetchUsers}
-                onChange={onChange}
-              />
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <Settings
-                viewMode={viewMode}
-                setViewMode={setViewMode}
-              />
-            }
-          />
-          <Route path="/about" element={<AboutUs />} />
-          <Route
-            path="/contacts/:id"
-            element={
-              <ContactEditPage
-                BASE_URL={BASE_URL}
-                onChange={onChange}
-                contactList={contactList}
-              />
-            }
-          />
-        </Routes>
+      <div className="flex">
+        <Navigation />
+        <div className="h-screen flex-1 p-5">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  BASE_URL={BASE_URL}
+                  contactList={contactList}
+                  contacts={contacts}
+                  loading={loading}
+                  setContactList={setContactList}
+                  updateContacts={updateContacts}
+                  setLoading={setLoading}
+                  error={error}
+                  setError={setError}
+                  fetchUsers={fetchUsers}
+                  onChange={onChange}
+                  checkedItems={checkedItems}
+                  setCheckedItems={setCheckedItems}
+                />
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <Settings/>
+              }
+            />
+            <Route path="/about" element={<AboutUs />} />
+            <Route
+              path="/contacts/:id"
+              element={
+                <ContactEditPage
+                  BASE_URL={BASE_URL}
+                  onChange={onChange}
+                  contactList={contactList}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
   );
 }
 

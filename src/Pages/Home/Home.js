@@ -22,12 +22,13 @@ const Home = ({
   fetchUsers,
   error,
   setError,
+  checkedItems,
+  setCheckedItems,
 }) => {
   const [modalMode, setModalMode] = useState(false);
   const [editItem, setEditItem] = useState();
   const [mode, setMode] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
-  const [checkedItems, setCheckedItems] = useState([]);
   const [addInline, setAddInline] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [searchBy, setSearchBy] = useState("firstName");
