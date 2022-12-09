@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { SET_LIST_VIEW, SET_CARD_VIEW } from "./actions/types";
+import { SET_SAVED_SETTINGS } from "./actions/types";
 
 const AppContext = createContext(null);
 const AppDispatchContext = createContext(null);
@@ -21,23 +21,10 @@ export const AppProvider = ({ children }) => {
 
 function appReducer(settings, action) {
   switch (action.type) {
-    case SET_LIST_VIEW:
-      localStorage.setItem(
-        "viewMode",
-        JSON.stringify(JSON.parse(true))
-      );
+    case SET_SAVED_SETTINGS:
       return {
         ...settings,
-        viewMode: true,
-      };
-    case SET_CARD_VIEW:
-        localStorage.setItem(
-            "viewMode",
-            JSON.stringify(JSON.parse(false))
-          );
-      return {
-        ...settings,
-        viewMode: false,
+        ...action.payload,
       };
     default:
       return {

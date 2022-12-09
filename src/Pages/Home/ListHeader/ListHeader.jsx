@@ -1,20 +1,23 @@
 import "./ListHeader.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownAZ } from "@fortawesome/free-solid-svg-icons";
+import { useSettings } from "../../../context/context";
+
 const ListHeader = ({
   onCheckAll,
   checkedItems,
   contactList,
-  viewMode,
   setSortBy,
   sortBy,
 }) => {
+  const viewMode = useSettings();
+
   return (
     <>
       <div className="card-view-header">
         <div
           className="card-header-checkbox"
-          style={{ display: viewMode === "list" ? "none" : "flex" }}
+          style={{ display: !viewMode ? "none" : "flex" }}
         >
           <input
             type="checkbox"
@@ -33,7 +36,7 @@ const ListHeader = ({
       </div>
       <div
         className="list-header"
-        style={{ display: viewMode === "list" ? "flex" : "none" }}
+        style={{ display: viewMode ? "flex" : "none" }}
       >
         <div className="header-checkbox">
           <input

@@ -90,3 +90,18 @@
 .settings-toggles label {
   color: rgba(255, 255, 255, 0.93);
 }
+.settings-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+}
+.settings-buttons button {
+  padding: 10px;
+  background-color: rgb(230, 230, 230, 0.8);
+  border-radius: 20px;
+  width: 100px;
+  transition: 0.3s ease-in-out;
+}
+.settings-buttons button:hover {
+  background-color: rgb(230, 230, 230, 1);
+}

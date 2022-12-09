@@ -1,2 +1,7 @@
 export const SET_LIST_VIEW = "SET_LIST_VIEW";
 export const SET_CARD_VIEW = "SET_CARD_VIEW";
+
+export const SET_MODAL_EDIT = "SET_MODAL_EDIT";
+export const SET_INLINE_EDIT = "SET_INLINE_EDIT";
+
+export const SET_SAVED_SETTINGS = "SET_SAVED_SETTINGS";

@@ -7,6 +7,7 @@ import InlineContactAdd from "./InlineContactAdd/InlineContactAdd";
 import NoContacts from "./NoContacts/NoContacts";
 import Pagination from "./Pagination/Pagination";
 import ContactList from "./ContactList/ContactList";
+import { useSettings } from "../../context/context";
 
 const Home = ({
   editMode,
@@ -38,7 +39,7 @@ const Home = ({
   const lastContactIndex = currentPage * onePageUserCount;
   const firstContactIndex = lastContactIndex - onePageUserCount;
   const currentPosts = contacts.slice(firstContactIndex, lastContactIndex);
-
+  const settings = useSettings();
   function onCheckAll() {
     setSelectAll(!selectAll);
     if (selectAll === false) {

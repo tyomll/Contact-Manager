@@ -1,22 +1,19 @@
 import "./Settings.css";
 import { useSettings, useSettingsDispatch } from "../../context/context";
-import { setCardView, setListView } from "../../context/actions/actions";
+import { setSavedSettings } from "../../context/actions/actions";
+import { useState } from "react";
 
-function Settings({ setViewMode, viewMode }) {
+function Settings() {
   const settings = useSettings();
   const dispatch = useSettingsDispatch();
+  const [previousSettings, setPreviousSettings] = useState(settings);
 
   const handleListViewModeChange = () => {
-    dispatch(setListView());
+    setPreviousSettings({ ...previousSettings, viewMode: true });
   };
-
   const handleCardViewModeChange = () => {
-    dispatch(setCardView());
+    setPreviousSettings({ ...previousSettings, viewMode: false });
   };
-  const handleViewModeChange = (e) => {
-    setViewMode(e.target.value);
-  };
-
   return (
     <div className="settings-page-container">
       <div className="settings-toggles">
@@ -29,7 +26,7 @@ function Settings({ setViewMode, viewMode }) {
             <input
               name="card-view"
               type="radio"
-              checked={!settings.viewMode || ""}
+              checked={!previousSettings.viewMode || ""}
               onChange={handleCardViewModeChange}
             />
           </div>
@@ -38,10 +35,16 @@ function Settings({ setViewMode, viewMode }) {
             <input
               name="list-view"
               type="radio"
-              checked={settings.viewMode || ""}
+              checked={previousSettings.viewMode || ""}
               onChange={handleListViewModeChange}
             />
           </div>
+        </div>
+        <div className="settings-buttons">
+          <button onClick={() => dispatch(setSavedSettings(previousSettings))}>
+            Save
+          </button>
+          <button onClick={() => setPreviousSettings(settings)}>Cancel</button>
         </div>
       </div>
     </div>
