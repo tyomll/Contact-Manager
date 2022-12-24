@@ -9,7 +9,6 @@ import Navigation from "../Navigation/Navigation";
 import ContactEditPage from "../Pages/ContactPage/ContactPage";
 import { useSettings } from "../context/context";
 function App() {
-
   const checkedContactsFromLocalStorage =
     localStorage.getItem("checkedContacts") || "[]";
   const [contactList, setContactList] = useState([]);
@@ -21,25 +20,32 @@ function App() {
   );
 
   const BASE_URL = axios.create({
-    baseURL: "https://636f41c5f2ed5cb047d8e6ee.mockapi.io/contactlist/",
+    baseURL:
+      "https://contact-manager-a1d0a-default-rtdb.europe-west1.firebasedatabase.app/",
   });
 
   async function fetchUsers() {
     try {
       setLoading(true);
       setError("");
-      const response = await BASE_URL.get("/users");
+      const response = await BASE_URL.get("users.json");
       setLoading(false);
       const users = response.data;
-      setContactList(users);
-      updateContacts(users);
+      const contacts = users
+        ? Object.keys(users).map((key) => ({
+            ...users[key],
+            id: key,
+          }))
+        : [];
+      setContactList(contacts);
+      updateContacts(contacts);
     } catch (e) {
       setError(e.message);
     }
   }
   async function onChange(newInfo) {
     setLoading(true);
-    await BASE_URL.put(`/users/${newInfo.id}`, newInfo);
+    const response = await BASE_URL.put(`users/${newInfo.id}.json`, newInfo);
     setLoading(false);
     setContactList(
       contactList.map((item) => {
@@ -62,55 +68,49 @@ function App() {
     fetchUsers();
   }, []);
 
-
   useEffect(() => {
     localStorage.setItem("checkedContacts", checkedItems);
   }, [checkedItems]);
   return (
-      <div className="flex">
-        <Navigation />
-        <div className="h-screen flex-1 p-5">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  BASE_URL={BASE_URL}
-                  contactList={contactList}
-                  contacts={contacts}
-                  loading={loading}
-                  setContactList={setContactList}
-                  updateContacts={updateContacts}
-                  setLoading={setLoading}
-                  error={error}
-                  setError={setError}
-                  fetchUsers={fetchUsers}
-                  onChange={onChange}
-                  checkedItems={checkedItems}
-                  setCheckedItems={setCheckedItems}
-                />
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <Settings/>
-              }
-            />
-            <Route path="/about" element={<AboutUs />} />
-            <Route
-              path="/contacts/:id"
-              element={
-                <ContactEditPage
-                  BASE_URL={BASE_URL}
-                  onChange={onChange}
-                  contactList={contactList}
-                />
-              }
-            />
-          </Routes>
-        </div>
+    <div className="flex">
+      <Navigation />
+      <div className="h-screen flex-1 p-5">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                BASE_URL={BASE_URL}
+                contactList={contactList}
+                contacts={contacts}
+                loading={loading}
+                setContactList={setContactList}
+                updateContacts={updateContacts}
+                setLoading={setLoading}
+                error={error}
+                setError={setError}
+                fetchUsers={fetchUsers}
+                onChange={onChange}
+                checkedItems={checkedItems}
+                setCheckedItems={setCheckedItems}
+              />
+            }
+          />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route
+            path="/contacts/:id"
+            element={
+              <ContactEditPage
+                BASE_URL={BASE_URL}
+                onChange={onChange}
+                contactList={contactList}
+              />
+            }
+          />
+        </Routes>
       </div>
+    </div>
   );
 }
 

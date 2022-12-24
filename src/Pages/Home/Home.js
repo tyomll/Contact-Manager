@@ -54,7 +54,7 @@ const Home = ({
   }
   async function onAdd(contact) {
     try {
-      const response = await BASE_URL.post("/users", contact);
+      const response = await BASE_URL.post("users.json", contact);
       setContactList([...contactList, response.data]);
       updateContacts([...contactList, response.data]);
       fetchUsers();
@@ -80,7 +80,7 @@ const Home = ({
   }
   async function onDelete(id) {
     try {
-      BASE_URL.delete(`/users/${id}`);
+      BASE_URL.delete(`users/${id}.json`);
       setContactList(
         contactList.filter((contact) => {
           return contact.id !== id;
