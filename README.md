@@ -15,8 +15,9 @@ To get started with the application, you'll need to clone the repository and ins
 
 
 ## Clone the repository
+```sh
 git clone https://github.com/tyommmm/Contact-Manager.git
-
+```
 ## Install the dependencies
 ```sh
 npm install
