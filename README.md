@@ -1,6 +1,6 @@
 # Contact Manager
 
-A simple web application for managing contacts, built with React.js, React Hooks, Axios, Tailwind.css, and Mockapi.io.
+Web application for managing contacts, built with React.js, React Hooks, Axios, Tailwind.css, and Mockapi.io.
 
 ## Features
 
