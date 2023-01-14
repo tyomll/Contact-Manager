@@ -44,5 +44,6 @@ This will create a production-ready build of the application in the build direct
 
 Author
 Artyom Hovsepyan - [@tyommmm](https://github.com/tyommmm)
-License
+
+## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
